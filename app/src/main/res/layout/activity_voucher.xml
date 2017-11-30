@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    tools:context="com.gropse.serviceme.activities.provider.VoucherActivity">
+
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/appbar" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:srcCompat="@drawable/ic_coupon" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/msg_please_enter_the_voucher_code"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_16ssp"
+        android:textAlignment="center"
+        android:layout_marginTop="@dimen/_20sdp"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/etVoucher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:inputType="text"
+        android:paddingEnd="@dimen/_10sdp"
+        android:minHeight="@dimen/_40sdp" />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnProceed"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@drawable/button_bg_round"
+        android:text="@string/proceed"
+        android:textColor="@color/colorWhite"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_20sdp"
+        />
+
+</LinearLayout>

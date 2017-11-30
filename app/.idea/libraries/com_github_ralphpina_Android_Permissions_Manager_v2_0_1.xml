@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.github.ralphpina:Android-Permissions-Manager-v2.0.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/Android-Permissions-Manager-v2.0.1.aar/409070d5451d5458571d222cab906830/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/Android-Permissions-Manager-v2.0.1.aar/409070d5451d5458571d222cab906830/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.ralphpina/Android-Permissions-Manager/v2.0.1/187a1bfd1e39283d8c88e62ebf8d0e4ab3bac702/Android-Permissions-Manager-v2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

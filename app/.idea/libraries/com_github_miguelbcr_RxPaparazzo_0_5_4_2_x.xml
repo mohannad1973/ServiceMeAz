@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.github.miguelbcr:RxPaparazzo-0.5.4-2.x">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RxPaparazzo-0.5.4-2.x.aar/01a77c6a126815667ea01b202a1710b7/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/RxPaparazzo-0.5.4-2.x.aar/01a77c6a126815667ea01b202a1710b7/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.miguelbcr/RxPaparazzo/0.5.4-2.x/4ff5968cafb94e38d6d6990a721176cd42984217/RxPaparazzo-0.5.4-2.x-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

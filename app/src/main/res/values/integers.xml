@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="password_min">4</integer>
+    <integer name="password_max">12</integer>
+    <integer name="otp_length">4</integer>
+    <integer name="mobile_length">10</integer>
+</resources>

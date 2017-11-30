@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:context="com.gropse.serviceme.activities.provider.SignUpProviderActivity">
+
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/appbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_below="@+id/progressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_20sdp">
+
+                <android.support.design.widget.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/AppTheme.AppBarOverlay">
+
+                    <RelativeLayout
+                        android:id="@+id/llReviewImageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_150sdp"
+                        android:background="@drawable/bg_signup">
+
+                        <RelativeLayout
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_80sdp"
+                            android:layout_centerInParent="true">
+
+                            <com.gropse.serviceme.widget.CircleImageView
+                                android:id="@+id/ivProfile"
+                                android:layout_width="@dimen/_80sdp"
+                                android:layout_height="@dimen/_80sdp"
+                                android:src="@drawable/ic_user_profile"
+                                app:civ_border_color="@color/colorPrimary"
+                                app:civ_border_width="@dimen/_2sdp" />
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                app:srcCompat="@drawable/edit" />
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </android.support.design.widget.AppBarLayout>
+
+                <LinearLayout
+                    android:id="@+id/llProvider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvIndividual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="@string/individual"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvCompany"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/_5sdp"
+                        android:paddingEnd="@dimen/_15sdp"
+                        android:paddingStart="@dimen/_15sdp"
+                        android:paddingTop="@dimen/_5sdp"
+                        android:text="@string/company"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="@dimen/_12ssp" />
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/full_name"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp" />
+
+                <RelativeLayout
+                    android:id="@+id/rlMobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/etMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="@string/mobile"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_25sdp" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/etCode"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@null"
+                        android:gravity="center"
+                        android:hint="@string/_00"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:paddingEnd="0dp"
+                        android:paddingStart="@dimen/_5sdp" />
+
+                    <View
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="match_parent"
+                        android:layout_alignEnd="@+id/etCode"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:background="@color/colorGrey" />
+                </RelativeLayout>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/service_location"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:textSize="@dimen/_16ssp" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/home_city"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp" />
+
+                <LinearLayout
+                    android:id="@+id/llCompany"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/etRegistration"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:gravity="center"
+                        android:hint="@string/company_registration_no"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_5sdp" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/etWebsite"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:gravity="center"
+                        android:hint="@string/website"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/_25sdp"
+                        android:paddingStart="@dimen/_5sdp" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/etLicense"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/license_no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvServices"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:gravity="center"
+                    android:hint="@string/services"
+                    android:inputType="textCapWords"
+                    android:maxLines="1"
+                    android:paddingEnd="@dimen/_25sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:textSize="@dimen/_16ssp" />
+
+                <android.support.v7.widget.AppCompatCheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/accept_terms_and_condition"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="@dimen/_14ssp" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvProceed"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="@string/proceed"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_14ssp" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:gravity="center"
+                    android:text="@string/already_have_an_account_login"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="@dimen/_14ssp" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
+</LinearLayout>
+

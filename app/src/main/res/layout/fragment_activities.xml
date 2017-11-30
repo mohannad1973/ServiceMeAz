@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    tools:context="com.gropse.serviceme.fragment.user.ActivitiesFragment">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_marginStart="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvPending"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_1sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/pending" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvOngoing"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_1sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/ongoing" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvCompleted"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_1sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/completed" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvCancelled"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_1sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/cancelled" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tvFavourite"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_margin="@dimen/_1sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@string/favourite" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvNoService"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_service"
+        android:textSize="@dimen/_20sdp"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

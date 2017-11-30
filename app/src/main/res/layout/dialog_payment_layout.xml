@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/_20sdp"
+    android:paddingStart="@dimen/_20sdp">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corners_modified"
+        android:gravity="center_vertical|center_horizontal"
+        android:minHeight="@dimen/_45sdp"
+        android:text="@string/payment"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorWhite" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="@dimen/_80sdp"
+            android:textColor="@color/colorPrimary"
+            android:text="@string/to_accept_this_request_please_pay"
+            android:textSize="@dimen/_16ssp" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnVoucher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg_round"
+            android:gravity="center_vertical|center_horizontal"
+            android:minHeight="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:text="@string/voucher"
+            android:textSize="@dimen/_14ssp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:textColor="@color/colorWhite"
+            />
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btnCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg_round"
+            android:gravity="center_vertical|center_horizontal"
+            android:minHeight="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:text="@string/card"
+            android:textSize="@dimen/_14ssp"
+            android:visibility="gone"
+            android:textColor="@color/colorWhite"
+            />
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corners_primary_color"
+        android:gravity="center_vertical|center_horizontal"
+        android:minHeight="@dimen/_45sdp"
+        android:text="@string/done"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorWhite"
+        />
+
+
+</LinearLayout>

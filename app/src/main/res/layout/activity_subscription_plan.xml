@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:context="com.gropse.serviceme.activities.both.SubscriptionPlanActivity">
+
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/appbar" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/llParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/llPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@color/colorPrimary"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:gravity="center"
+                        android:text="@string/current_plan_details"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="@string/duration"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/tvDuration"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp"
+                            tools:text="Duration" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="@string/start_date"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/tvStartDate"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp"
+                            tools:text="Start Date" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="@string/end_date"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/tvEndDate"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp"
+                            tools:text="End Date" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="@string/payment_type"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/tvPayType"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp"
+                            tools:text="Payment Type" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:text="@string/cost"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/tvCost"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="@dimen/_12ssp"
+                            tools:text="Cost" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvSubscriptionPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/about_plan"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/_16ssp"
+                    android:visibility="visible" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvAboutPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/_14ssp"
+                    android:visibility="visible"
+                    tools:text="Lorem Ipsum" />
+
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvPayNow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/pay_now"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_14ssp" />
+    </LinearLayout>
+</LinearLayout>

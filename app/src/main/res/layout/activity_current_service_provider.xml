@@ -1,0 +1,379 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/appBar"
+        layout="@layout/appbar" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tvNoService"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_service"
+        android:textSize="@dimen/_20sdp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/llParent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/llHeaderView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:background="@drawable/bg_signup"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.gropse.serviceme.widget.CircleImageView
+                android:id="@+id/ivProvider"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:src="@drawable/ic_user_profile"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="@dimen/_2sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tvProviderName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:layout_weight="0.5"
+                    android:gravity="bottom"
+                    android:paddingEnd="@dimen/_5sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_14ssp"
+                    tools:text="Md. Arsad Khan" />
+
+                <com.gropse.serviceme.utils.RatingView
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_gravity="bottom|end"
+                    app:numStars="5"
+                    app:rating="2" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_20sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:background="@color/colorWhite">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:baselineAligned="false"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_90sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_screen_item_selector"
+                            android:orientation="vertical"
+                            android:paddingTop="@dimen/_10sdp">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                                android:gravity="center_vertical"
+                                android:paddingEnd="0dp"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:text="@string/address"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/tvAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:gravity="center_vertical"
+                                android:paddingEnd="0dp"
+                                android:paddingStart="@dimen/_40sdp"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_14ssp"
+                                tools:text="D-54 Madhu Vihar Delhi 110065" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_90sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/home_screen_item_selector"
+                            android:orientation="vertical"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="@dimen/_20sdp"
+                            android:paddingTop="@dimen/_10sdp">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="@dimen/_10sdp"
+                                android:drawableStart="@drawable/ic_location_on_black_24dp"
+                                android:gravity="center_vertical"
+                                android:paddingEnd="0dp"
+                                android:paddingStart="@dimen/_10sdp"
+                                android:text="@string/distance"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_14ssp" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/tvDistance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:gravity="center_vertical"
+                                android:paddingEnd="0dp"
+                                android:paddingStart="@dimen/_40sdp"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="@dimen/_14ssp"
+                                tools:text="5 KM" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="@dimen/_1sdp"
+                        android:background="@color/colorWhite"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_20sdp"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/arrow" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/tvStartTime"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:text="@string/_8_00_am"
+                                android:textColor="@color/colorBlack" />
+
+                            <android.support.v7.widget.AppCompatImageView
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_gravity="center_vertical"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_service_man" />
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/tvEndTime"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="start"
+                                android:text="@string/_8_00_pm"
+                                android:textColor="@color/colorBlack" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="@dimen/_20sdp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvName"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_14ssp"
+                        tools:text="Rishab Khan" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="@dimen/_20sdp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/service_type"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvServiceType"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_14ssp"
+                        tools:text="Lorem Ipsum" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="@dimen/_20sdp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/location"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvLocation"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_14ssp"
+                        tools:text="Lorem Ipsum" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="@dimen/_20sdp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_number"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvPhoneNumber"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_14ssp"
+                        tools:text="9876543210" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingEnd="0dp"
+                    android:paddingStart="@dimen/_20sdp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="@dimen/_120sdp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/status"
+                        android:textColor="@color/colorGrey"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="@dimen/_140sdp"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_edit"
+                        android:padding="@dimen/_5sdp"
+                        android:text="@string/accepted"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/_14ssp" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btnDone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:minHeight="@dimen/_35sdp"
+                    android:text="@string/done"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_14ssp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+</LinearLayout>
