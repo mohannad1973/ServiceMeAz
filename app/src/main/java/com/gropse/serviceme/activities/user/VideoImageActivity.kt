@@ -15,6 +15,7 @@ import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.ServiceGenerator
+import com.gropse.serviceme.pojo.AddServiceRequest
 import com.gropse.serviceme.pojo.BaseResponse
 import com.gropse.serviceme.pojo.FileResult
 import com.gropse.serviceme.utils.*
@@ -36,11 +37,16 @@ class VideoImageActivity : BaseActivity() {
     private var files = ""
     private val REQUEST_TAKE_GALLERY_VIDEO = 987
 
+    private lateinit var request: AddServiceRequest
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_image)
         mActivity = this
         setUpToolbar(R.string.video_images)
+
+        var data: Bundle = intent.extras
+        request = data.getSerializable("FileRequest") as AddServiceRequest
 
         btnDone.circularDrawable()
 
@@ -76,18 +82,19 @@ class VideoImageActivity : BaseActivity() {
 
         btnDone.setOnClickListener {
             val intent = Intent()
-            intent.putExtra("files", files)
+            //intent.putExtra("files", files)
+            intent.putExtra("files", request)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
 
-        if(Prefs(this).image1.isNotBlank()) ivImage1.setImageBitmap(StringToBitMap(Prefs(this).image1))
-        if(Prefs(this).image2.isNotBlank()) ivImage2.setImageBitmap(StringToBitMap(Prefs(this).image2))
-        if(Prefs(this).image3.isNotBlank()) ivImage3.setImageBitmap(StringToBitMap(Prefs(this).image3))
+        if (Prefs(this).image1.isNotBlank()) ivImage1.setImageBitmap(StringToBitMap(Prefs(this).image1))
+        if (Prefs(this).image2.isNotBlank()) ivImage2.setImageBitmap(StringToBitMap(Prefs(this).image2))
+        if (Prefs(this).image3.isNotBlank()) ivImage3.setImageBitmap(StringToBitMap(Prefs(this).image3))
 
-        if(Prefs(this).video1.isNotBlank()) ivVideo1.loadUrl(Prefs(this).video1)
-        if(Prefs(this).video2.isNotBlank()) ivVideo1.loadUrl(Prefs(this).video2)
-        if(Prefs(this).video3.isNotBlank()) ivVideo1.loadUrl(Prefs(this).video3)
+        if (Prefs(this).video1.isNotBlank()) ivVideo1.loadUrl(Prefs(this).video1)
+        if (Prefs(this).video2.isNotBlank()) ivVideo1.loadUrl(Prefs(this).video2)
+        if (Prefs(this).video3.isNotBlank()) ivVideo1.loadUrl(Prefs(this).video3)
     }
 
     private fun showImageChooser() {
@@ -128,12 +135,12 @@ class VideoImageActivity : BaseActivity() {
 
         prepareMediaToUpload("0", bean.imagePath)
 
-        val type = RequestBody.create(MediaType.parse("text/plain"), "0")
+        /* val type = RequestBody.create(MediaType.parse("text/plain"), "0")
 
-        val file = File(bean.imagePath)
-        val requestFile = RequestBody.create(MediaType.parse("image/*"), file)
+         val file = File(bean.imagePath)
+         val requestFile = RequestBody.create(MediaType.parse("image*//*"), file)
         val imageFile = MultipartBody.Part.createFormData("file", file.name, requestFile)
-        addFile(type, imageFile)
+        addFile(type, imageFile)*/
     }
 
     private fun showVideoPicker() {
@@ -148,7 +155,14 @@ class VideoImageActivity : BaseActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_TAKE_GALLERY_VIDEO && resultCode == Activity.RESULT_OK && data != null) {
 
-            val path = getPath(data.data)
+            var path = getPath(data.data)
+            if (path == null) {
+                if (data.data.toString().startsWith("file:///")) {
+                    path = data.data.toString().replace("file://", "")
+                }else{
+                    toast(R.string.file_not_found)
+                }
+            }
             prepareMediaToUpload("1", path ?: "")
             when (iconNumber) {
                 "5" -> {
@@ -184,10 +198,22 @@ class VideoImageActivity : BaseActivity() {
         val type = RequestBody.create(MediaType.parse("text/plain"), t)
 
         val file = File(p)
+        val bytes = file.length()
+        val kilobytes = bytes / 1024
+        val megabytes = kilobytes / 1024
         val requestFile = RequestBody.create(MediaType.parse(if (t == "0") "image/*" else "video/*"), file)
 //        val requestFile = RequestBody.create(MediaType.parse(contentResolver.getType(Uri.fromFile(file))), file)
         val mediaFile = MultipartBody.Part.createFormData("file", file.name, requestFile)
-        addFile(type, mediaFile)
+        if (mediaFile.body().contentType()!!.type().equals("image")) {
+            if (megabytes <= 1) {
+                addFile(type, mediaFile)
+            } else {
+                toast(R.string.message_error_image_size)
+            }
+        } else {
+            addFile(type, mediaFile)
+        }
+
     }
 
     private fun addFile(type: RequestBody, file: MultipartBody.Part) {
@@ -198,7 +224,7 @@ class VideoImageActivity : BaseActivity() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->
-                        onResponse(response)
+                        onResponse(response, file.body().contentType()!!.type())
                     }, { throwable ->
                         throwable.printStackTrace()
                         onError(throwable)
@@ -207,7 +233,7 @@ class VideoImageActivity : BaseActivity() {
         }
     }
 
-    private fun onResponse(response: Any) {
+    private fun onResponse(response: Any, mediaType: String) {
         try {
             if (response is BaseResponse) {
                 when (response.errorCode) {
@@ -216,7 +242,12 @@ class VideoImageActivity : BaseActivity() {
                     200 -> {
                         if (response.obj.isJsonObject) {
                             val bean = Gson().fromJson(response.obj.asJsonObject.toString(), FileResult::class.java)
-                            bean?.id.let { files += bean?.id + ", " }
+                            //bean?.id.let { files += bean?.id + ", " }
+                            if (mediaType!!.equals("image")) {
+                                request.images.add(bean!!.id)
+                            } else if (mediaType!!.equals("video")) {
+                                request.videos.add(bean!!.id)
+                            }
                         }
                     }
                 }

@@ -111,12 +111,14 @@ class CreateRequestActivity : BaseActivity(), OnMapReadyCallback {
 
         btnAddPhoto.setOnClickListener {
             val intent = Intent(this@CreateRequestActivity, VideoImageActivity::class.java)
+            intent!!.putExtra("FileRequest",addServiceRequest)
             //intent.putExtra(ImageUtility::class.java.name, imageBean) as ImageUtility.ImageBean
             startActivityForResult(intent, 909)
         }
 
         btnAddVideo.setOnClickListener {
             val intent = Intent(this@CreateRequestActivity, VideoImageActivity::class.java)
+            intent!!.putExtra("FileRequest",addServiceRequest)
             //intent.putExtra(ImageUtility::class.java.name, imageBean) as ImageUtility.ImageBean
             startActivityForResult(intent, 909)
         }
@@ -211,8 +213,9 @@ class CreateRequestActivity : BaseActivity(), OnMapReadyCallback {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 909 && resultCode == Activity.RESULT_OK && data != null) {
-            val file = data.getStringExtra("files")
-            addServiceRequest.files = if (file.isNotBlank()) file.replace(", $".toRegex(), "") else ""
+            //val file = data.getStringExtra("files")
+            addServiceRequest= data.getSerializableExtra("files") as AddServiceRequest
+            //addServiceRequest.files = if (file.isNotBlank()) file.replace(", $".toRegex(), "") else ""
         }
     }
 

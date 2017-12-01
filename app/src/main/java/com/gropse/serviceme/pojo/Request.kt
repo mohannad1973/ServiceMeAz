@@ -116,7 +116,9 @@ data class AddServiceRequest(
         @SerializedName("user_id") var userId: String = "",
         @SerializedName("ser_type") var serType: String = "",
         @SerializedName("is_scheduled") var isScheduled: String = "",
-        @SerializedName("files") var files: String = ""
+        @SerializedName("files") var files: String = "",
+        @SerializedName("images") var images: ArrayList<String> = ArrayList(),
+        @SerializedName("videos") var videos: ArrayList<String> = ArrayList()
 
 
 ) : Serializable

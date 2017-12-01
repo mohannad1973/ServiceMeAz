@@ -71,11 +71,11 @@ class Prefs internal constructor(mContext: Context?) {
         set(locale) = sharedPreferences.edit().putString(PREFS_LOCALE, locale).apply()
 
     var latitude: String
-        get() = sharedPreferences.getString(PREFS_LATITUDE, "")
+        get() = sharedPreferences.getString(PREFS_LATITUDE, "0")
         set(latitude) = sharedPreferences.edit().putString(PREFS_LATITUDE, latitude).apply()
 
     var longitude: String
-        get() = sharedPreferences.getString(PREFS_LONGITUDE, "")
+        get() = sharedPreferences.getString(PREFS_LONGITUDE, "0")
         set(longitude) = sharedPreferences.edit().putString(PREFS_LONGITUDE, longitude).apply()
 
     var location: String
