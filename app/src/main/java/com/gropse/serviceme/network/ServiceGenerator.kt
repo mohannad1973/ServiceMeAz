@@ -12,6 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object ServiceGenerator {
 
     private val BASE_URL = "http://serviceme-today.com/ServiceMeadmin/"
+    private val check="abc";
     //private val BASE_URL = BuildConfig.BASE_URL
 
     private val builder = Retrofit.Builder()
