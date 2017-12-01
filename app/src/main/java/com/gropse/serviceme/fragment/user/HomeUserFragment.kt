@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.user.HomeUserActivity
 import com.gropse.serviceme.activities.user.ServiceActivity
@@ -15,10 +17,7 @@ import com.gropse.serviceme.adapter.HomeUserAdapter
 import com.gropse.serviceme.fragment.BaseFragment
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.ServiceGenerator
-import com.gropse.serviceme.pojo.CommonRequest
-import com.gropse.serviceme.pojo.HomeResponse
-import com.gropse.serviceme.pojo.HomeResult
-import com.gropse.serviceme.pojo.Providers
+import com.gropse.serviceme.pojo.*
 import com.gropse.serviceme.slider.BaseSliderView
 import com.gropse.serviceme.slider.DefaultSliderView
 import com.gropse.serviceme.slider.SliderLayout
@@ -28,7 +27,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home_user.*
 
 class HomeUserFragment : BaseFragment() {
-    private var bean = HomeResult()
+    private var bean = UserHomeResult()
     private var commonRequest = CommonRequest()
     private lateinit var homeUserAdapter: HomeUserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,16 +45,19 @@ class HomeUserFragment : BaseFragment() {
         tvOffice.circularDrawable()
         tvHome.circularDrawable()
 
-//
-//        homeUserAdapter = HomeUserAdapter(object : HomeUserAdapter.OnItemClick{
-//            override fun onClick(bean: Providers, type: Int) {
-//
-//            }
-//        })
-//        rvHome.layoutManager = LinearLayoutManager(activity)
-//        rvHome.adapter = homeUserAdapter
 
-        llOffice.setOnClickListener {
+        homeUserAdapter = HomeUserAdapter(object : HomeUserAdapter.OnItemClick {
+            override fun onClick(bean: CategoryResult, type: Int) {
+                Log.e("Catagoty",""+bean.id)
+                val intent = Intent(activity, ServiceActivity::class.java)
+                intent.putExtra(AppConstants.SERVICE_FOR, ""+bean.id)
+                startActivity(intent)
+            }
+        })
+        rvHome.layoutManager = LinearLayoutManager(activity)
+        rvHome.adapter = homeUserAdapter
+
+     /*   llOffice.setOnClickListener {
             val intent = Intent(activity, ServiceActivity::class.java)
             intent.putExtra(AppConstants.SERVICE_FOR, AppConstants.SERVICE_OFFICE)
             startActivity(intent)
@@ -65,7 +67,7 @@ class HomeUserFragment : BaseFragment() {
             val intent = Intent(activity, ServiceActivity::class.java)
             intent.putExtra(AppConstants.SERVICE_FOR, AppConstants.SERVICE_HOME)
             startActivity(intent)
-        }
+        }*/
 
         initSlider()
 
@@ -75,7 +77,7 @@ class HomeUserFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==111 && resultCode== Activity.RESULT_OK && data!=null){
+        if (requestCode == 111 && resultCode == Activity.RESULT_OK && data != null) {
             homeUser()
         }
     }
@@ -113,11 +115,12 @@ class HomeUserFragment : BaseFragment() {
 
     private fun onResponse(response: Any) {
         try {
-            if (response is HomeResponse) {
+            if (response is UserHomeResponse) {
                 if (response.errorCode == 200) {
-                    bean = response.result ?: HomeResult()
+                    bean = response.result ?: UserHomeResult()
                     (activity as HomeUserActivity).setPlan(bean)
-//                    homeUserAdapter.addList(bean)
+
+                    homeUserAdapter.addList(bean.category!!)
                 }
             }
             if (activity != null)

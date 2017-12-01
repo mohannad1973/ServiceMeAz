@@ -150,7 +150,7 @@ interface NetworkClient {
             @Header("device_id") deviceId: String,
             @Header("security_token") securityToken: String,
             @Body request: CommonRequest
-    ): Observable<HomeResponse>
+    ): Observable<UserHomeResponse>
 
     @POST(NetworkConstants.API_READY_NOT_READY_PROVIDER)
     fun readyNotReadyProvider(

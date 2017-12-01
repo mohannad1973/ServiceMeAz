@@ -41,8 +41,8 @@ data class SignUpRequest(
         @SerializedName("is_email_verified") var isEmailVerified: Int = -1,
         @SerializedName("image") var image: String = "",
 
-        @SerializedName("latitude") var latitude: String = "",
-        @SerializedName("longitude") var longitude: String = "",
+        @SerializedName("latitude") var latitude: String = "0",
+        @SerializedName("longitude") var longitude: String = "0",
         @SerializedName("city") var city: String = "",
 
         //FOR GET PROFILE

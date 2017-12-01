@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layoutDirection="ltr"
+    android:orientation="vertical"
     tools:context="com.gropse.serviceme.fragment.user.HomeUserFragment">
 
     <RelativeLayout
@@ -25,9 +25,9 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvHome"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/llOffice"
@@ -36,6 +36,7 @@
         android:layout_weight="1"
         android:background="@drawable/home_screen_item_selector"
         android:orientation="vertical"
+        android:visibility="gone"
         android:padding="@dimen/_5sdp">
 
         <android.support.v7.widget.AppCompatImageView
@@ -62,12 +63,12 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-
     <LinearLayout
         android:id="@+id/llHome"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:visibility="gone"
         android:background="@drawable/home_screen_item_selector"
         android:orientation="vertical"
         android:padding="@dimen/_5sdp">
@@ -90,6 +91,41 @@
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="@string/service_for_homes"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        android:background="@drawable/home_screen_item_selector"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ivDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/home_service" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/item_delivery"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/_16ssp"

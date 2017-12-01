@@ -15,6 +15,7 @@ import com.gropse.serviceme.fragment.user.HomeUserFragment
 import com.gropse.serviceme.fragment.user.ProfileUserFragment
 import com.gropse.serviceme.pojo.HomeResult
 import com.gropse.serviceme.pojo.PlanResult
+import com.gropse.serviceme.pojo.UserHomeResult
 import com.gropse.serviceme.utils.toast
 import kotlinx.android.synthetic.main.activity_home_user.*
 
@@ -22,7 +23,7 @@ import kotlinx.android.synthetic.main.activity_home_user.*
 class HomeUserActivity : BaseActivity() {
     private var isEditEnabled = false
     private var backPressed = 0L
-    private var bean: HomeResult? = null
+    private var bean: UserHomeResult? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_user)
@@ -57,7 +58,7 @@ class HomeUserActivity : BaseActivity() {
         invalidateOptionsMenu()
     }
 
-    fun setPlan(plan: HomeResult?) {
+    fun setPlan(plan: UserHomeResult?) {
         bean = plan
     }
 

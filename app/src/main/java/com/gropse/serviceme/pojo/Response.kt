@@ -43,6 +43,30 @@ data class HomeResponse(
         @SerializedName("Result") var result: HomeResult? = null
 )
 
+data class UserHomeResponse(
+        @SerializedName("isSuccess") var isSuccess: Boolean = false,
+        @SerializedName("errorCode") var errorCode: Int = 0,
+        @SerializedName("message") var message: String = "",
+        @SerializedName("Result") var result: UserHomeResult? = null
+)
+
+data class UserHomeResult (
+    @SerializedName("pending") var pending: Int = 0,
+
+    @SerializedName("cancelled") var cancelled: Int = 0,
+
+    @SerializedName("favourites") var favourites: Int = 0,
+
+    @SerializedName("completed") var completed: Int = 0,
+
+    @SerializedName("ongoing") var ongoing: Int = 0,
+
+    @SerializedName("plan") var plan: PlanResult? = null,
+
+    @SerializedName("category") var category: ArrayList<CategoryResult>? = null
+)
+
+
 data class HomeResult(
         @SerializedName("requests") var requests: Int = 0,
         @SerializedName("cancelled") var cancelled: Int = 0,

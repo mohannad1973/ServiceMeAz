@@ -5,16 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gropse.serviceme.R
+import com.gropse.serviceme.pojo.CategoryResult
 import com.gropse.serviceme.pojo.Providers
+import com.gropse.serviceme.utils.circularDrawable
 import com.gropse.serviceme.utils.loadUrl
 import kotlinx.android.synthetic.main.list_item_home.view.*
 import java.util.ArrayList
 
 class HomeUserAdapter(private var listener: OnItemClick?) : RecyclerView.Adapter<HomeUserAdapter.CategoryViewHolder>() {
-    private val list = ArrayList<Providers>()
+    private val list = ArrayList<CategoryResult>()
 
     interface OnItemClick {
-        fun onClick(bean: Providers, type: Int)
+        fun onClick(bean: CategoryResult, type: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -29,7 +31,7 @@ class HomeUserAdapter(private var listener: OnItemClick?) : RecyclerView.Adapter
         return list.size
     }
 
-    fun addList(newList: ArrayList<Providers>) {
+    fun addList(newList: ArrayList<CategoryResult>) {
         list.addAll(newList)
         notifyDataSetChanged()
     }
@@ -51,6 +53,7 @@ class HomeUserAdapter(private var listener: OnItemClick?) : RecyclerView.Adapter
 
             itemView.ivImage.loadUrl(bean.image)
             itemView.tvName.text = bean.name
+            itemView.tvName.circularDrawable()
 //            itemView.btnPrice.text = bean
         }
 

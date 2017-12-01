@@ -199,4 +199,5 @@
     <string name="online">Online</string>
     <string name="message_schedule">Date : %1$s\nTime : %2$s</string>
     <string name="change_language">Change Language</string>
+    <string name="item_delivery">Item Delivery</string>
 </resources>
