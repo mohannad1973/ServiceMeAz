@@ -133,3 +133,4 @@ data class SubscriptionRequest(
         @SerializedName("transaction_type") var transactionType: Int = 0,
         @SerializedName("transaction_id") var transactionId: String = ""
 ) : Serializable
+

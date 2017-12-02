@@ -50,20 +50,20 @@ data class UserHomeResponse(
         @SerializedName("Result") var result: UserHomeResult? = null
 )
 
-data class UserHomeResult (
-    @SerializedName("pending") var pending: Int = 0,
+data class UserHomeResult(
+        @SerializedName("pending") var pending: Int = 0,
 
-    @SerializedName("cancelled") var cancelled: Int = 0,
+        @SerializedName("cancelled") var cancelled: Int = 0,
 
-    @SerializedName("favourites") var favourites: Int = 0,
+        @SerializedName("favourites") var favourites: Int = 0,
 
-    @SerializedName("completed") var completed: Int = 0,
+        @SerializedName("completed") var completed: Int = 0,
 
-    @SerializedName("ongoing") var ongoing: Int = 0,
+        @SerializedName("ongoing") var ongoing: Int = 0,
 
-    @SerializedName("plan") var plan: PlanResult? = null,
+        @SerializedName("plan") var plan: PlanResult? = null,
 
-    @SerializedName("category") var category: ArrayList<CategoryResult>? = null
+        @SerializedName("category") var category: ArrayList<CategoryResult>? = null
 )
 
 
@@ -207,4 +207,26 @@ data class VoucherResult(
         @SerializedName("code") var code: String = "",
         @SerializedName("price") var price: Int = 0,
         @SerializedName("expire_after") var expireAfter: Long = 0L
+) : Serializable
+
+data class TermsResponse(
+        @SerializedName("isSuccess") var isSuccess: Boolean = false,
+
+        @SerializedName("errorCode") var errorCode: Int = 0,
+
+        @SerializedName("message") var message: String? = null,
+
+        @SerializedName("result") var result: TermsResult? = null
+) : Serializable
+
+data class TermsResult(
+        @SerializedName("id") var id: String? = "",
+
+        @SerializedName("data") var data: String? = "",
+
+        @SerializedName("arabicData") var arabicData: String? = "",
+
+        @SerializedName("urduData") var urduData: String? = "",
+
+        @SerializedName("russianData") var russianData: String? = ""
 ) : Serializable

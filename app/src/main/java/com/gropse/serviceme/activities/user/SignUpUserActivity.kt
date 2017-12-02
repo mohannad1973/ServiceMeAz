@@ -3,6 +3,8 @@ package com.gropse.serviceme.activities.user
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Address
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
@@ -18,6 +20,7 @@ import com.google.gson.Gson
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.activities.both.MobileVerificationActivity
+import com.gropse.serviceme.activities.provider.VoucherActivity
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.NetworkConstants
 import com.gropse.serviceme.network.ServiceGenerator
@@ -32,6 +35,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign_up_user.*
+import kotlinx.android.synthetic.main.dialog_payment_layout.view.*
+import kotlinx.android.synthetic.main.dialog_terms.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -46,6 +51,8 @@ class SignUpUserActivity : BaseActivity() {
     private var mFacebookManager: FacebookManager? = null
     private var twitterManager: TwitterManager? = null
     private val PLACE_PICKER_REQUEST = 1
+
+    private var alertDialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,7 +99,7 @@ class SignUpUserActivity : BaseActivity() {
             }
         })
 
-        twitterManager = TwitterManager(mActivity, AppConstants.TWITTER_CONSUMER_KEY, AppConstants.TWITTER_CONSUMER_SECRET, object : OnSocialLoginListener{
+        twitterManager = TwitterManager(mActivity, AppConstants.TWITTER_CONSUMER_KEY, AppConstants.TWITTER_CONSUMER_SECRET, object : OnSocialLoginListener {
             override fun onSocialLogin(bean: SocialBean) {
                 twitterManager?.doLogout()
                 signUpRequest.type = AppConstants.LOGIN_TYPE_TWITTER
@@ -137,8 +144,8 @@ class SignUpUserActivity : BaseActivity() {
         ivTwitter.setOnClickListener { twitterManager?.doLogin() }
         ivGoogle.setOnClickListener { startActivityForResult(Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient), RC_SIGN_IN) }
 
-        tv_terms.setOnClickListener{
-
+        tv_terms.setOnClickListener {
+            getTerms()
         }
         ivNext.setOnClickListener {
             if (signUpRequest.isEmailVerified == -1) {
@@ -391,5 +398,51 @@ class SignUpUserActivity : BaseActivity() {
                     }
                 })
         RxJavaPlugins.setErrorHandler { throwable -> Log.e("Error", "Error", throwable) }
+    }
+
+    private fun dialogTerms(terms: String) {
+        val dialogBuilder = AlertDialog.Builder(this)
+        val inflater = this.layoutInflater
+        val dialogView = inflater.inflate(R.layout.dialog_terms, null)
+        dialogBuilder.setView(dialogView)
+        dialogView.btnDone1.setOnClickListener {
+            alertDialog?.dismiss()
+        }
+        dialogView.tvTerms.text = terms
+
+        alertDialog = dialogBuilder.create()
+        if (alertDialog?.window != null) {
+            alertDialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+        alertDialog?.show()
+    }
+
+    private fun getTerms() {
+        if (isNetworkAvailable(true)) {
+            progressBar.visible()
+            frameLayout.visible()
+            val client = ServiceGenerator.createService(NetworkClient::class.java)
+            val disposable = client.termsAndConditions()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response ->
+                        onTermsResponse(response)
+                    }, { throwable ->
+                        onError(throwable)
+                    })
+            compositeDisposable?.add(disposable)
+        }
+    }
+
+    private fun onTermsResponse(response: TermsResponse) {
+        when (response.errorCode) {
+            1 -> logout()
+            3 -> toast(response.message)
+            200 -> {
+                dialogTerms(response.result!!.data!!)
+            }
+        }
+        progressBar.gone()
+        frameLayout.gone()
     }
 }

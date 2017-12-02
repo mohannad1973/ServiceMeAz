@@ -27,8 +27,10 @@ object NetworkConstants {
     private const val UPDATE_STATUS = "update_status"
     private const val CURRENT_SERVICE = "current_service"
 
+
     ///////////////////////////////////////////////////////////////////////////
 
+    const val TERMS = "terms"
     const val API_SIGN_UP_CHECK_PROVIDER = "signUpCheck" + PROVIDER
     const val API_SIGN_UP_PROVIDER = "signUp" + PROVIDER
     const val API_LOGIN_PROVIDER = LOGIN + PROVIDER

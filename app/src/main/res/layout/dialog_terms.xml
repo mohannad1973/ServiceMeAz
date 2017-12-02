@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:paddingEnd="@dimen/_20sdp"
+    android:paddingStart="@dimen/_20sdp">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corners_modified"
+        android:gravity="center_vertical|center_horizontal"
+        android:minHeight="@dimen/_45sdp"
+        android:text="@string/payment"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorWhite" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvTerms"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:minHeight="@dimen/_80sdp"
+            android:textColor="@color/colorPrimary"
+            android:padding="5dp"
+            android:text="eiuewruasdkhsakdjsakdjasdkjasdm,snd,masnd,mdn,asmdnas,dmnas,dmn,dmnas,mdnas,dmna,sdmnas,dmnasd,mnasd,mnsad,msand,amsdn,asmdna,smdn,sdmn,sakjdhksadjhkasdjhksadjhskdhskjdhksjdhkdjhksdhkajsdhkj"
+            android:textSize="@dimen/_16ssp" />
+
+    </ScrollView>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btnDone1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corners_primary_color"
+        android:gravity="center_vertical|center_horizontal"
+        android:minHeight="@dimen/_45sdp"
+        android:text="@string/done"
+        android:textSize="@dimen/_14ssp"
+        android:textColor="@color/colorWhite"
+        />
+
+
+</LinearLayout>

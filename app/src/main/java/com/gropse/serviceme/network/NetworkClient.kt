@@ -354,4 +354,7 @@ interface NetworkClient {
             @Header("security_token") securityToken: String,
             @Body request: CommonRequest
     ): Observable<BaseResponse>
+
+    @POST(NetworkConstants.TERMS)
+    fun termsAndConditions(): Observable<TermsResponse>
 }
