@@ -137,6 +137,9 @@ class SignUpUserActivity : BaseActivity() {
         ivTwitter.setOnClickListener { twitterManager?.doLogin() }
         ivGoogle.setOnClickListener { startActivityForResult(Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient), RC_SIGN_IN) }
 
+        tv_terms.setOnClickListener{
+
+        }
         ivNext.setOnClickListener {
             if (signUpRequest.isEmailVerified == -1) {
                 signUpRequest.type = AppConstants.LOGIN_TYPE_EMAIL

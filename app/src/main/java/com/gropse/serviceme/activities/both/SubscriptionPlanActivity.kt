@@ -1,12 +1,14 @@
 package com.gropse.serviceme.activities.both
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
+import android.widget.ArrayAdapter
 import com.google.gson.Gson
 import com.gropse.serviceme.R
 import com.gropse.serviceme.adapter.SubscriptionPlanAdapter
@@ -50,9 +52,10 @@ class SubscriptionPlanActivity : BaseActivity() {
             tvEndDate.formatMillisDateTime(plan.planEnd)
             tvPayType.text = if (plan.transactionType == VOUCHER) getString(R.string.voucher) else getString(R.string.online)
 
-            tvPayNow.gone()
+            //tvPayNow.gone()
+            tvPayNow.text = resources.getText(R.string.str_renew)
         } else {
-            subscriptionPlan()
+            //subscriptionPlan()
         }
 
         subscriptionRequest.userId = Prefs(this).userId
@@ -80,8 +83,14 @@ class SubscriptionPlanActivity : BaseActivity() {
         tvPayNow.circularDrawable()
         tvPayNow.drawable(end = R.drawable.ic_chevron_right_black_24dp)
         tvPayNow.setOnClickListener {
-            dialogPay()
+            if (tvPayNow.text.equals(resources.getText(R.string.str_renew))) {
+                selectPlan()
+            } else if (tvPayNow.text.equals(resources.getText(R.string.pay_now))) {
+                dialogPay()
+            }
+
         }
+        subscriptionPlan()
     }
 
     private fun dialogPay() {
@@ -100,7 +109,7 @@ class SubscriptionPlanActivity : BaseActivity() {
             }
         }
         dialogView.btnCard.setOnClickListener {
-//            payTabs()
+            //            payTabs()
             alertDialog?.dismiss()
         }
 
@@ -174,7 +183,12 @@ class SubscriptionPlanActivity : BaseActivity() {
                         val bean = Gson().fromJson<ArrayList<SubscriptionPlanResult>>(response.obj.asJsonArray.toString(), object : TypeToken<ArrayList<SubscriptionPlanResult>>() {}.type)
                         planList.clear()
                         planList.addAll(bean)
-                        subscriptionPlanAdapter.addList(planList)
+                        if (tvPayNow.text.equals(resources.getText(R.string.str_renew))) {
+
+                        } else if (tvPayNow.text.equals(resources.getText(R.string.pay_now))) {
+                            subscriptionPlanAdapter.addList(planList)
+                        }
+
                     }
                     if (response.obj.isJsonObject) {
                         toast(response.message)
@@ -225,5 +239,26 @@ class SubscriptionPlanActivity : BaseActivity() {
 //        intent.putExtra("pt_postal_code_shipping", "966") //Put Country Phone code if Postal code not available '00973'
 //        startActivityForResult(intent, REQUEST_CODE_PAYTABS)
 //    }
+
+    fun selectPlan() {
+
+
+        var list : ArrayList<String> = ArrayList()
+        for (i in 0 until planList.size) {
+            list.add(planList.get(i).name)
+        }
+        val licenseTypeAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, list)
+
+        val licenseTypeBuilder = android.app.AlertDialog.Builder(this)
+                .setSingleChoiceItems(licenseTypeAdapter, 0) { dialog, which ->
+                    subscriptionPlanResult = planList.get(which)
+                    subscriptionRequest.planId = planList.get(which).id
+
+                    dialogPay()
+                    dialog.cancel()
+                }
+        val licenseTypeAlert = licenseTypeBuilder.create()
+        licenseTypeAlert.show()
+    }
 
 }

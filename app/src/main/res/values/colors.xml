@@ -7,4 +7,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGrey">#848484</color>
     <color name="colorButton">#010976</color>
+    <color name="gray">#898989</color>
+    <color name="light_gray">#b6b6b6</color>
 </resources>

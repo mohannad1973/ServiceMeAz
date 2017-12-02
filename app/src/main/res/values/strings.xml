@@ -202,4 +202,5 @@
     <string name="item_delivery">Item Delivery</string>
     <string name="message_error_image_size">Please select image have size less than 1 mb.</string>
     <string name="file_not_found">File not fount</string>
+    <string name="str_renew">Re-New</string>
 </resources>

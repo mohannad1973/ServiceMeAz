@@ -10,6 +10,7 @@ import com.gropse.serviceme.pojo.OrderResult
 import com.gropse.serviceme.utils.*
 import kotlinx.android.synthetic.main.item_orders.view.*
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class OrderProviderAdapter(private var type: String?, private var listener: OnItemClick?) : RecyclerView.Adapter<OrderProviderAdapter.CategoryViewHolder>() {
     private val list = ArrayList<OrderResult>()
@@ -86,7 +87,9 @@ class OrderProviderAdapter(private var type: String?, private var listener: OnIt
             itemView.tvName.text = bean.name
             itemView.tvLocation.text = bean.location
             itemView.tvDistance.roundDecimal(bean.distance)
-            itemView.tvTime.leftTime(if (bean.timeLeft == -1L) 0 else bean.timeLeft)
+            /*itemView.tvTime.leftTime(if (bean.createdDate == -1L) 0 else bean.createdDate)*/
+
+            itemView.tvTime.leftTime(bean.createdDate)
             itemView.tvType.text = bean.serType
             itemView.tvDate.formatMillisDateTime(bean.serTime, "dd/MM/yyyy  HH:mm")
             itemView.tvReason.text = bean.reason
