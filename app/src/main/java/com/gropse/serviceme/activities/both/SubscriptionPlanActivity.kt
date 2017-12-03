@@ -181,8 +181,42 @@ class SubscriptionPlanActivity : BaseActivity() {
                     llParent.visible()
                     if (response.obj.isJsonArray) {
                         val bean = Gson().fromJson<ArrayList<SubscriptionPlanResult>>(response.obj.asJsonArray.toString(), object : TypeToken<ArrayList<SubscriptionPlanResult>>() {}.type)
+
+                        var plan1: SubscriptionPlanResult = SubscriptionPlanResult()
+                        var plan2: SubscriptionPlanResult = SubscriptionPlanResult()
+                        var plan3: SubscriptionPlanResult = SubscriptionPlanResult()
+                        var plan4: SubscriptionPlanResult = SubscriptionPlanResult()
+                        for (x in 0 until bean.size) {
+                            if (bean!!.get(x).name.equals("Subscription for 1 Months")) {
+                                plan1 = bean!!.get(x)
+                                plan1.name = resources.getText(R.string.plan1) as String
+                            } else if (bean!!.get(x).name.equals("Subscription for 3 Months")) {
+                                plan2 = bean!!.get(x)
+                                plan2.name = resources.getText(R.string.plan2) as String
+                            } else if (bean!!.get(x).name.equals("Subscription for 6 Months")) {
+                                plan3 = bean!!.get(x)
+                                plan3.name = resources.getText(R.string.plan3) as String
+                            } else if (bean!!.get(x).name.equals("Subscription for 12 Months")) {
+                                plan4 = bean!!.get(x)
+                                plan4.name = resources.getText(R.string.plan4) as String
+                            }
+                            /*when (bean!!.get(x).name) {
+                                "Subscription for 1 Months" -> plan1 = bean!!.get(x)
+                                "Subscription for 3 Months" -> plan2 = bean!!.get(x)
+                                "Subscription for 6 Months" -> plan3 = bean!!.get(x)
+                                "Subscription for 12 Months" -> plan4 = bean!!.get(x)
+                            }*/
+                        }
+
+
                         planList.clear()
-                        planList.addAll(bean)
+                        planList.add(plan1)
+                        planList.add(plan2)
+                        planList.add(plan3)
+                        planList.add(plan4)
+
+
+                        //planList.addAll(bean)
                         if (tvPayNow.text.equals(resources.getText(R.string.str_renew))) {
 
                         } else if (tvPayNow.text.equals(resources.getText(R.string.pay_now))) {
@@ -245,9 +279,9 @@ class SubscriptionPlanActivity : BaseActivity() {
         /*planList.sortWith(compareBy ({
             it.name
         }))*/
-        Collections.sort(planList,
-                { o1, o2 -> o1.name.compareTo(o2.name) })
-
+        /* Collections.sort(planList,
+                 { o1, o2 -> o1.name.compareTo(o2.name) })
+ */
         var list: ArrayList<String> = ArrayList()
         for (i in 0 until planList.size) {
             list.add(planList.get(i).name)

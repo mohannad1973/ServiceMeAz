@@ -231,9 +231,9 @@ data class TermsResult(
 
         @SerializedName("data") var data: String? = "",
 
-        @SerializedName("arabicData") var arabicData: String? = "",
+        @SerializedName("arabic_data") var arabicData: String? = "",
 
-        @SerializedName("urduData") var urduData: String? = "",
+        @SerializedName("urdu_data") var urduData: String? = "",
 
-        @SerializedName("russianData") var russianData: String? = ""
+        @SerializedName("russian_data") var russianData: String? = ""
 ) : Serializable

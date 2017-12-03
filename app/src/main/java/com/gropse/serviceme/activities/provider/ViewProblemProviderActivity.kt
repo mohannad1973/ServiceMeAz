@@ -55,6 +55,14 @@ class ViewProblemProviderActivity : BaseActivity() {
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewProblemFiles.url)))
                     }
                 }
+                else{
+                    //imageViews[index].setTag(0,viewProblemFiles.url)
+                    //imageViews[index].setImageDrawable(resources.getDrawable(R.drawable.p))
+                    imageViews[index].setOnClickListener{
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewProblemFiles.url)))
+                    }
+                }
+
             }
         }
     }

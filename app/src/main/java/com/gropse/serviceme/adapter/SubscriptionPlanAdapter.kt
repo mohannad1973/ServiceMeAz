@@ -44,6 +44,15 @@ class SubscriptionPlanAdapter(private var listener: OnItemClick?) : RecyclerView
             itemView.tag = position
             val bean = list[position]
             itemView.ivPlanName.text =bean.name
+            /*if (bean!!.name.equals("Subscription for 1 Months")) {
+                itemView.ivPlanName.text =
+            } else if (bean!!.name.equals("Subscription for 3 Months")) {
+                itemView.ivPlanName.text
+            } else if (bean!!.name.equals("Subscription for 6 Months")) {
+                itemView.ivPlanName.text
+            } else if (bean!!.name.equals("Subscription for 12 Months")) {
+                itemView.ivPlanName.text
+            }*/
             itemView.ivPrice.text = String.format("SAR %s",bean.price)
             itemView.backgroundColor(if (bean.isSelected) R.color.colorPrimary else R.color.colorGrey)
         }

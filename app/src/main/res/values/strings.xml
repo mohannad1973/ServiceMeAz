@@ -197,8 +197,9 @@
     <string name="payment_type">Payment Type</string>
     <string name="cost">Cost</string>
     <string name="online">Online</string>
-    <string name="message_schedule">Date : %1$s\nTime : %2$s</string>
+    <string name="message_schedule">Date : %1$s Time : %2$s</string>
     <string name="change_language">Change Language</string>
+
     <string name="item_delivery">Item Delivery</string>
     <string name="message_error_image_size">Please select image have size less than 1 mb.</string>
     <string name="file_not_found">File not fount</string>
@@ -214,4 +215,10 @@
     <string name="subject">Subject</string>
     <string name="query">Query</string>
     <string name="call">Call Us</string>
+    <string name="plan1">Subscription for 1 Months</string>
+    <string name="plan2">Subscription for 3 Months</string>
+    <string name="plan3">Subscription for 6 Months</string>
+    <string name="plan4">Subscription for 12 Months</string>
+    <string name="select_description">Select Description</string>
+    <string name="ready">Ready</string>
 </resources>

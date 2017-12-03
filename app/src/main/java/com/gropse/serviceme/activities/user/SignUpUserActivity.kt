@@ -20,7 +20,6 @@ import com.google.gson.Gson
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.activities.both.MobileVerificationActivity
-import com.gropse.serviceme.activities.provider.VoucherActivity
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.NetworkConstants
 import com.gropse.serviceme.network.ServiceGenerator
@@ -35,7 +34,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_sign_up_user.*
-import kotlinx.android.synthetic.main.dialog_payment_layout.view.*
 import kotlinx.android.synthetic.main.dialog_terms.view.*
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -440,7 +438,15 @@ class SignUpUserActivity : BaseActivity() {
             3 -> toast(response.message)
             200 -> {
                 val bean = Gson().fromJson(response.obj.asJsonObject.toString(), TermsResult::class.java)
-                dialogTerms(bean!!.data!!)
+                when (Prefs(this).locale) {
+                    "en" -> dialogTerms(bean!!.data!!)
+                    "ar" -> dialogTerms(bean!!.arabicData!!)
+                    "ur" -> dialogTerms(bean!!.urduData!!)
+                    "tr" -> dialogTerms(bean!!.data!!)
+                    "ru" -> dialogTerms(bean!!.russianData!!)
+                    else -> dialogTerms(bean!!.data!!)
+                }
+
             }
         }
         progressBar.gone()
