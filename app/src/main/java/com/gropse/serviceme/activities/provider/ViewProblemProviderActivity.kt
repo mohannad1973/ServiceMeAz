@@ -3,6 +3,7 @@ package com.gropse.serviceme.activities.provider
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.widget.ImageView
@@ -48,7 +49,12 @@ class ViewProblemProviderActivity : BaseActivity() {
         val imageViews: ArrayList<ImageView> = ArrayList(Arrays.asList(ivImage1, ivImage2, ivImage3))
         beanArray.forEachIndexed { index, viewProblemFiles ->
             run {
-                if (viewProblemFiles.type == 0) imageViews[index].loadUrl(viewProblemFiles.url)
+                if (viewProblemFiles.type == 0) {
+                    imageViews[index].loadUrl(viewProblemFiles.url)
+                    imageViews[index].setOnClickListener{
+                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewProblemFiles.url)))
+                    }
+                }
             }
         }
     }
@@ -64,7 +70,7 @@ class ViewProblemProviderActivity : BaseActivity() {
             if (responseCode == "100") {
                 commonRequest.transactionId = transactionId
                 acceptProvider()
-            }else{
+            } else {
                 toast("Transaction Failed")
             }
         }
@@ -82,7 +88,7 @@ class ViewProblemProviderActivity : BaseActivity() {
             alertDialog?.dismiss()
         }
         dialogView.btnCard.setOnClickListener {
-//            payTabs()
+            //            payTabs()
             alertDialog?.dismiss()
         }
 

@@ -15,13 +15,13 @@
         android:background="@drawable/bg_rounded_corners_modified"
         android:gravity="center_vertical|center_horizontal"
         android:minHeight="@dimen/_45sdp"
-        android:text="@string/payment"
+        android:text="@string/str_terms"
         android:textSize="@dimen/_14ssp"
         android:textColor="@color/colorWhite" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
         android:background="@color/colorWhite"
         android:orientation="vertical">
 

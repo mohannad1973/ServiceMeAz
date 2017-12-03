@@ -1,7 +1,7 @@
 package com.gropse.serviceme.activities.both
 
+//import paytabs.project.PayTabActivity
 import android.app.Activity
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,20 +10,20 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
 import android.widget.ArrayAdapter
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.gropse.serviceme.R
+import com.gropse.serviceme.activities.provider.VoucherActivity
 import com.gropse.serviceme.adapter.SubscriptionPlanAdapter
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.ServiceGenerator
 import com.gropse.serviceme.pojo.*
+import com.gropse.serviceme.utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_subscription_plan.*
-//import paytabs.project.PayTabActivity
-import kotlin.collections.ArrayList
-import com.google.gson.reflect.TypeToken
-import com.gropse.serviceme.activities.provider.VoucherActivity
-import com.gropse.serviceme.utils.*
 import kotlinx.android.synthetic.main.dialog_payment_layout.view.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class SubscriptionPlanActivity : BaseActivity() {
@@ -242,8 +242,13 @@ class SubscriptionPlanActivity : BaseActivity() {
 
     fun selectPlan() {
 
+        /*planList.sortWith(compareBy ({
+            it.name
+        }))*/
+        Collections.sort(planList,
+                { o1, o2 -> o1.name.compareTo(o2.name) })
 
-        var list : ArrayList<String> = ArrayList()
+        var list: ArrayList<String> = ArrayList()
         for (i in 0 until planList.size) {
             list.add(planList.get(i).name)
         }

@@ -48,7 +48,7 @@
                     android:layout_margin="@dimen/_10sdp"
                     android:background="@drawable/shape_plan_detail"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <android.support.v7.widget.AppCompatTextView
                         android:layout_width="match_parent"

@@ -59,7 +59,9 @@ class OrderProviderActivity : BaseActivity() {
 //                                }
                                 }
                                 AppConstants.SCHEDULED_ORDERS -> {
-
+                                    val intent = Intent(this@OrderProviderActivity, AcceptingActivity::class.java)
+                                    intent.putExtra(OrderResult::class.java.name, bean)
+                                    startActivity(intent)
                                 }
                                 AppConstants.COMPLETED_ORDERS -> {
 

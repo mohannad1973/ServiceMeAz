@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layoutDirection="ltr"
+    android:orientation="vertical"
     tools:context="com.gropse.serviceme.activities.both.OptionActivity">
 
     <LinearLayout
@@ -27,9 +27,9 @@
                 android:background="@color/colorPrimary" />-->
 
             <LinearLayout
-                android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -45,26 +45,26 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="@dimen/_12ssp"
+                        android:text="@string/location"
                         android:textColor="@color/colorWhite"
-                        android:text="@string/location"/>
+                        android:textSize="@dimen/_12ssp" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/ivPin"
                         android:layout_width="@dimen/_16sdp"
                         android:layout_height="@dimen/_16sdp"
-                        android:background="@color/colorWhite"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/_2sdp"
+                        android:background="@color/colorWhite"
                         android:padding="@dimen/_2sdp"
-                        app:srcCompat="@drawable/ic_location_on_black_24dp"
-                        android:layout_gravity="center_vertical" />
+                        app:srcCompat="@drawable/ic_location_on_black_24dp" />
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="5dp"
                     android:id="@+id/llChangeLanguage"
                     android:layout_width="@dimen/_110sdp"
                     android:layout_height="@dimen/_20sdp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/colorButton"
                     android:orientation="horizontal">
 
@@ -74,19 +74,20 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:textSize="@dimen/_12ssp"
+                        android:text="@string/change_language"
                         android:textColor="@color/colorWhite"
-                        android:text="@string/change_language"/>
+                        android:textSize="@dimen/_12ssp" />
 
                 </LinearLayout>
+
                 <LinearLayout
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:id="@+id/llOptions"
-                    android:orientation="vertical"
-                    android:gravity="right"
-                    android:visibility="invisible"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:gravity="right"
+                    android:orientation="vertical"
+                    android:visibility="invisible">
 
                     <LinearLayout
                         android:id="@+id/llLanguageOption1"
@@ -98,42 +99,44 @@
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tvEnglish"
                             android:layout_width="@dimen/_64sdp"
-                            android:padding="@dimen/_3sdp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@drawable/option_left_bg"
+                            android:gravity="center"
+                            android:padding="@dimen/_3sdp"
                             android:text="@string/english"
                             android:textAllCaps="false"
                             android:textColor="@color/colorGrey"
                             android:textSize="@dimen/_12ssp" />
+
                         <View
                             android:layout_width="@dimen/_2sdp"
                             android:layout_height="match_parent"
-                            android:background="@color/colorGrey"/>
+                            android:background="@color/colorGrey" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tvArabic"
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/option_center_bg"
                             android:gravity="center"
                             android:padding="@dimen/_3sdp"
                             android:text="@string/arabic"
                             android:textAllCaps="false"
-                            android:background="@drawable/option_center_bg"
                             android:textColor="@color/colorGrey"
                             android:textSize="@dimen/_12ssp" />
+
                         <View
                             android:layout_width="@dimen/_2sdp"
                             android:layout_height="match_parent"
-                            android:background="@color/colorGrey"/>
+                            android:background="@color/colorGrey" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tvTurkish"
-                            android:padding="@dimen/_3sdp"
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@drawable/option_right_bg"
+                            android:gravity="center"
+                            android:padding="@dimen/_3sdp"
                             android:text="@string/turkish"
                             android:textAllCaps="false"
                             android:textColor="@color/colorGrey"
@@ -144,17 +147,17 @@
                         android:id="@+id/llLanguage2"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/_24sdp"
-                        android:background="@drawable/language_option_bg"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/language_option_bg"
                         android:orientation="horizontal">
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tvUrdu"
                             android:layout_width="@dimen/_64sdp"
-                            android:padding="@dimen/_3sdp"
                             android:layout_height="match_parent"
-                            android:gravity="center"
                             android:background="@drawable/option_left_bg"
+                            android:gravity="center"
+                            android:padding="@dimen/_3sdp"
                             android:text="@string/urdu"
                             android:textAllCaps="false"
                             android:textColor="@color/colorGrey"
@@ -163,17 +166,17 @@
                         <View
                             android:layout_width="@dimen/_2sdp"
                             android:layout_height="match_parent"
-                            android:background="@color/colorGrey"/>
+                            android:background="@color/colorGrey" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tvRussian"
                             android:layout_width="@dimen/_64sdp"
                             android:layout_height="match_parent"
+                            android:background="@drawable/option_right_bg"
                             android:gravity="center"
                             android:padding="@dimen/_3sdp"
                             android:text="@string/russian"
                             android:textAllCaps="false"
-                            android:background="@drawable/option_right_bg"
                             android:textColor="@color/colorGrey"
                             android:textSize="@dimen/_12ssp" />
                     </LinearLayout>
@@ -185,36 +188,73 @@
         <android.support.v7.widget.AppCompatImageView
             android:layout_width="@dimen/_170sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_15sdp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_15sdp"
             android:adjustViewBounds="true"
-            app:srcCompat="@drawable/app_logo"/>
+            app:srcCompat="@drawable/app_logo" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tvLogin"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/str_login"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_14ssp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvSignUpUser"
             android:layout_width="@dimen/_200sdp"
-            android:background="@color/colorPrimary"
-            android:layout_gravity="center_horizontal"
             android:layout_height="@dimen/_35sdp"
-            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
             android:text="@string/sign_up_as_user"
             android:textColor="@color/colorWhite"
-            android:gravity="center"
-            android:textSize="@dimen/_14ssp"/>
+            android:textSize="@dimen/_14ssp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvSignUpProvider"
             android:layout_width="@dimen/_200sdp"
-            android:background="@color/colorPrimary"
-            android:layout_gravity="center_horizontal"
             android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_15sdp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
             android:text="@string/sign_up_as_provider"
             android:textColor="@color/colorWhite"
-            android:gravity="center"
-            android:textSize="@dimen/_14ssp"/>
+            android:textSize="@dimen/_14ssp" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:drawableTop="@drawable/about_us"
+                android:gravity="center"
+                android:onClick="aboutUs"
+                android:text="@string/str_about_us" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:drawableTop="@drawable/contact_us"
+                android:gravity="center"
+                android:onClick="contactUs"
+                android:text="@string/str_contact_us" />
+        </RelativeLayout>
+
+        <!--<android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvLogin"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_35sdp"
@@ -223,20 +263,20 @@
             android:text="@string/already_have_an_account_login"
             android:textColor="@color/colorGrey"
             android:gravity="center"
-            android:textSize="@dimen/_14ssp"/>
+            android:textSize="@dimen/_14ssp"/>-->
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tvSkip"
             android:layout_width="@dimen/_200sdp"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/colorPrimary"
             android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/skip_for_now"
-            android:visibility="gone"
-            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"
             android:gravity="center"
-            android:textSize="@dimen/_14ssp"/>
+            android:text="@string/skip_for_now"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_14ssp"
+            android:visibility="gone" />
 
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

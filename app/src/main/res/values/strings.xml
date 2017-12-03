@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ServiceMe</string>
-    <string name="facebook_app_id">137861593610823</string>
-    <string name="fb_login_protocol_scheme">fb137861593610823</string>
+    <string name="facebook_app_id">541609842859564</string>
+    <string name="fb_login_protocol_scheme">fb541609842859564</string>
     <string name="location">Location</string>
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
@@ -203,4 +203,15 @@
     <string name="message_error_image_size">Please select image have size less than 1 mb.</string>
     <string name="file_not_found">File not fount</string>
     <string name="str_renew">Re-New</string>
+    <string name="str_terms"><![CDATA[Terms & Conditions]]></string>
+    <string name="about_us">About Us</string>
+    <string name="str_login">Service me Login</string>
+    <string name="str_about_us">About</string>
+    <string name="str_contact_us">Contact Us</string>
+    <string name="message_enter_phone">Please Enter Phone Number.</string>
+    <string name="message_enter_query">Please Enter Query</string>
+    <string name="message_enter_subject">Please Enter Subject</string>
+    <string name="subject">Subject</string>
+    <string name="query">Query</string>
+    <string name="call">Call Us</string>
 </resources>

@@ -1,27 +1,28 @@
 package com.gropse.serviceme.activities.both
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.location.Address
-import android.location.Location
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
 import android.view.View
+import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
-import com.gropse.serviceme.MyApplication
+import com.google.android.gms.location.LocationServices
 import com.gropse.serviceme.R
+import com.gropse.serviceme.activities.aboutus_contactus.AboutUsActivity
+import com.gropse.serviceme.activities.aboutus_contactus.ContactUsActivity
 import com.gropse.serviceme.activities.provider.SignUpProviderActivity
 import com.gropse.serviceme.activities.user.SignUpUserActivity
-import com.gropse.serviceme.utils.*
+import com.gropse.serviceme.utils.AppConstants
+import com.gropse.serviceme.utils.Prefs
+import com.gropse.serviceme.utils.circularDrawable
+import com.gropse.serviceme.utils.textColor
 import com.patloew.rxlocation.RxLocation
 import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.android.synthetic.main.activity_option.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 
 
 class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
@@ -40,6 +41,7 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         llLocation.circularDrawable(R.color.colorButton)
         tvSignUpUser.circularDrawable()
         tvSignUpProvider.circularDrawable()
+        tvLogin.circularDrawable()
         tvSkip.circularDrawable()
         ivPin.circularDrawable(R.color.colorWhite)
         llChangeLanguage.circularDrawable(R.color.colorButton)
@@ -49,15 +51,14 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
 
         llLocation.setOnClickListener {
             startLocationRequest()
-            Log.d("Location","Country:" +Prefs(this).countryName)
+            Log.d("Location", "Country:" + Prefs(this).countryName)
         }
 
-        llChangeLanguage.setOnClickListener{
+        llChangeLanguage.setOnClickListener {
             if (!isOptionShown) {
                 llOptions.visibility = View.VISIBLE
                 isOptionShown = true
-            }
-            else {
+            } else {
                 llOptions.visibility = View.INVISIBLE
                 isOptionShown = false
             }
@@ -66,7 +67,7 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
 //        llLanguage1.circularBorderDrawable(5)
 //        llLanguage2.circularBorderDrawable(5)
 
-        tvLogin.spannableText(getString(R.string.already_have_an_account_login, getString(R.string.login)), getString(R.string.login))
+        //tvLogin.spannableText(getString(R.string.already_have_an_account_login, getString(R.string.login)), getString(R.string.login))
 
         Prefs(this).deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
 
@@ -82,7 +83,7 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
             urdu()
             recreate()
         }
-        tvTurkish.setOnClickListener{
+        tvTurkish.setOnClickListener {
             turkish()
             recreate()
         }
@@ -107,7 +108,7 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         methodRequiresTwoPermission()
     }
 
-    private fun resetViews(){
+    private fun resetViews() {
         isOptionShown = false
         llOptions.visibility = View.INVISIBLE
         tvEnglish.isSelected = false
@@ -129,21 +130,21 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
 
     }
 
-    private fun english(){
+    private fun english() {
         resetViews()
         tvEnglish.isSelected = true
         tvEnglish.textColor(R.color.colorWhite)
         Prefs(this).locale = "en"
     }
 
-    private fun turkish(){
+    private fun turkish() {
         resetViews()
         tvTurkish.isSelected = true
         tvTurkish.textColor(R.color.colorWhite)
         Prefs(this).locale = "tr"
     }
 
-    private fun russian(){
+    private fun russian() {
         resetViews()
         tvRussian.isSelected = true
         tvRussian.textColor(R.color.colorWhite)
@@ -151,8 +152,7 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
     }
 
 
-
-    private fun arabic(){
+    private fun arabic() {
         resetViews()
         //tvArabic.circularDrawable()
         tvArabic.isSelected = true
@@ -160,7 +160,7 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         Prefs(this).locale = "ar"
     }
 
-    private fun urdu(){
+    private fun urdu() {
         resetViews()
         tvUrdu.isSelected = true
         tvUrdu.textColor(R.color.colorWhite)
@@ -200,12 +200,12 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
                     // Got last known location. In some rare situations this can be null.
                     if (location != null) {
                         // Logic to handle location object
-                        Log.d("location",""+location.latitude+" "+location.longitude)
+                        Log.d("location", "" + location.latitude + " " + location.longitude)
                         //tvLocation.setText()
                     }
                 }
-                .addOnFailureListener(this){
-                    Log.d("fail","fail")
+                .addOnFailureListener(this) {
+                    Log.d("fail", "fail")
                 }
 
 
@@ -218,11 +218,11 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         compositeDisposable?.add(rxLocation.settings().checkAndHandleResolution(locationRequest)
                 .subscribe { aBoolean ->
                     if (aBoolean) {
-                      /*  compositeDisposable?.add(rxLocation.location().updates(locationRequest)
-                                .flatMap<Address> { location -> rxLocation.geocoding().fromLocation(location).toObservable() }
-                                .subscribe { address ->
-                                    tvLocation.text = address.countryName
-                                })*/
+                        /*  compositeDisposable?.add(rxLocation.location().updates(locationRequest)
+                                  .flatMap<Address> { location -> rxLocation.geocoding().fromLocation(location).toObservable() }
+                                  .subscribe { address ->
+                                      tvLocation.text = address.countryName
+                                  })*/
 
                         compositeDisposable?.add(rxLocation.location().lastLocation()
                                 .flatMapObservable { location -> rxLocation.geocoding().fromLocation(location).toObservable() }
@@ -233,5 +233,13 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
                     }
                 })
         RxJavaPlugins.setErrorHandler({ it.printStackTrace() })
+    }
+
+    public fun aboutUs(view: View) {
+        startActivity(Intent(this, AboutUsActivity::class.java))
+    }
+
+    public fun contactUs(view: View) {
+        startActivity(Intent(this, ContactUsActivity::class.java))
     }
 }

@@ -31,6 +31,8 @@ object NetworkConstants {
     ///////////////////////////////////////////////////////////////////////////
 
     const val TERMS = "terms"
+    const val ABOUT_US = "aboutUs"
+    const val CONTACT_US = "contactUs"
     const val API_SIGN_UP_CHECK_PROVIDER = "signUpCheck" + PROVIDER
     const val API_SIGN_UP_PROVIDER = "signUp" + PROVIDER
     const val API_LOGIN_PROVIDER = LOGIN + PROVIDER

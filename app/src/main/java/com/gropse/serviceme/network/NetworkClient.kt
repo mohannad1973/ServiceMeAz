@@ -356,5 +356,12 @@ interface NetworkClient {
     ): Observable<BaseResponse>
 
     @POST(NetworkConstants.TERMS)
-    fun termsAndConditions(): Observable<TermsResponse>
+    fun termsAndConditions(): Observable<BaseResponse>
+
+
+    @POST(NetworkConstants.ABOUT_US)
+    fun aboutUs(): Observable<BaseResponse>
+
+    @POST(NetworkConstants.CONTACT_US)
+    fun contactUs(@Body request: ContactUsRequest): Observable<BaseResponse>
 }

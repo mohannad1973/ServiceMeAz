@@ -159,6 +159,13 @@ data class SubscriptionPlanResult(
         var isSelected: Boolean = false
 )
 
+/*overside fun compare(jc1: SubscriptionPlanResult, jc2: SubscriptionPlanResult): Int {
+    return if (jc2.price < jc1.price)
+        -1
+    else
+        if (jc2.price === jc1.price) 0 else 1
+}*/
+
 data class AddServiceResult(
         @SerializedName("providers") var result: ArrayList<Providers>? = null,
         @SerializedName("ser_id") var serId: String = ""

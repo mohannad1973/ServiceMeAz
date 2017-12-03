@@ -134,3 +134,12 @@ data class SubscriptionRequest(
         @SerializedName("transaction_id") var transactionId: String = ""
 ) : Serializable
 
+data class ContactUsRequest(
+        @SerializedName("email") var email: String = "",
+        @SerializedName("name") var name: String = "",
+        @SerializedName("phone") var phone: String = "",
+        @SerializedName("subject") var subject: String = "",
+        @SerializedName("query") var query: String = ""
+
+) : Serializable
+

@@ -434,12 +434,13 @@ class SignUpUserActivity : BaseActivity() {
         }
     }
 
-    private fun onTermsResponse(response: TermsResponse) {
+    private fun onTermsResponse(response: BaseResponse) {
         when (response.errorCode) {
             1 -> logout()
             3 -> toast(response.message)
             200 -> {
-                dialogTerms(response.result!!.data!!)
+                val bean = Gson().fromJson(response.obj.asJsonObject.toString(), TermsResult::class.java)
+                dialogTerms(bean!!.data!!)
             }
         }
         progressBar.gone()
