@@ -37,8 +37,12 @@ class ViewProblemProviderActivity : BaseActivity() {
         commonRequest.serId = orderResult.serId
         commonRequest.userId = Prefs(this).userId
         commonRequest.providerType = Prefs(this).userType
+        commonRequest.transactionId = Prefs(this).transactionId
 
-        btnAcceptRequest.setOnClickListener { dialogPay() }
+        btnAcceptRequest.setOnClickListener {
+            //dialogPay()
+            acceptProvider()
+        }
 
         viewProblem()
     }
@@ -47,22 +51,26 @@ class ViewProblemProviderActivity : BaseActivity() {
         tvDescription.text = bean.description
         val beanArray = bean.files ?: ArrayList()
         val imageViews: ArrayList<ImageView> = ArrayList(Arrays.asList(ivImage1, ivImage2, ivImage3))
+        val videoViews: ArrayList<ImageView> = ArrayList(Arrays.asList(ivVideo1, ivVideo2, ivVideo3))
+        ivVideo1
         beanArray.forEachIndexed { index, viewProblemFiles ->
             run {
                 if (viewProblemFiles.type == 0) {
                     imageViews[index].loadUrl(viewProblemFiles.url)
-                    imageViews[index].setOnClickListener{
+                    imageViews[index].setOnClickListener {
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewProblemFiles.url)))
                     }
                 }
-                else{
-                    //imageViews[index].setTag(0,viewProblemFiles.url)
-                    //imageViews[index].setImageDrawable(resources.getDrawable(R.drawable.p))
-                    imageViews[index].setOnClickListener{
+            }
+        }
+        beanArray.forEachIndexed { index, viewProblemFiles ->
+            run {
+                if (viewProblemFiles.type == 1) {
+                    videoViews[index].setImageDrawable(resources.getDrawable(R.drawable.ic_play))
+                    videoViews[index].setOnClickListener {
                         startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewProblemFiles.url)))
                     }
                 }
-
             }
         }
     }

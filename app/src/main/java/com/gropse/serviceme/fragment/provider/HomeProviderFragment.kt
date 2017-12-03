@@ -105,7 +105,7 @@ class HomeProviderFragment : BaseFragment() {
 
     }
 
-    private fun noStatus(){
+    private fun noStatus() {
         tvReady.circularLeftSideBorderGradient()
         tvNotReady.circularRightSideBorderGradient()
         tvReady.textColor(R.color.colorPrimary)
@@ -142,7 +142,7 @@ class HomeProviderFragment : BaseFragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==111 && resultCode== Activity.RESULT_OK && data!=null){
+        if (requestCode == 111 && resultCode == Activity.RESULT_OK && data != null) {
             homeProvider()
         }
     }
@@ -199,6 +199,7 @@ class HomeProviderFragment : BaseFragment() {
             if (response is HomeResponse) {
                 if (response.errorCode == 200) {
                     bean = response.result ?: HomeResult()
+                    Prefs(activity).transactionId = bean!!.plan!!.transactionId
                     updateUI()
                 }
             } else if (response is ReadyNotReadyResponse) {

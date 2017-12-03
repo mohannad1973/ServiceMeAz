@@ -14,6 +14,7 @@ class Prefs internal constructor(mContext: Context?) {
         private val PREFS_DEVICE_TOKEN = "PREFS_DEVICE_TOKEN"
         private val PREFS_DEVICE_ID = "DEVICE_ID"
         private val PREFS_SECURITY_TOKEN = "SECURITY_TOKEN"
+        private val PREFS_TRANSACTION_ID = "PREFS_TRANSACTION_ID"
         private val PREFS_USER_ID = "PREFS_USER_ID"
         private val PREFS_USER_TYPE = "PREFS_USER_TYPE"
         private val PREFS_NAME = "NAME"
@@ -65,6 +66,10 @@ class Prefs internal constructor(mContext: Context?) {
     var securityToken: String
         get() = sharedPreferences.getString(PREFS_SECURITY_TOKEN, "")
         set(securityToken) = sharedPreferences.edit().putString(PREFS_SECURITY_TOKEN, securityToken).apply()
+
+    var transactionId: String
+        get() = sharedPreferences.getString(PREFS_TRANSACTION_ID, "")
+        set(transactionId) = sharedPreferences.edit().putString(PREFS_TRANSACTION_ID, transactionId).apply()
 
     var locale: String
         get() = sharedPreferences.getString(PREFS_LOCALE, "")
