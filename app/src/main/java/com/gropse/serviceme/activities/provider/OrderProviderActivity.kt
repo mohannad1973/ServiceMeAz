@@ -4,27 +4,26 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.location.Address
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.google.android.gms.location.LocationRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.gropse.serviceme.MyApplication
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.activities.both.ReviewRatingActivity
 import com.gropse.serviceme.adapter.OrderProviderAdapter
+import com.gropse.serviceme.custom.CustomLinearLayoutManager
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.ServiceGenerator
-import com.gropse.serviceme.pojo.*
+import com.gropse.serviceme.pojo.BaseResponse
+import com.gropse.serviceme.pojo.CommonRequest
+import com.gropse.serviceme.pojo.OrderResult
 import com.gropse.serviceme.utils.*
 import com.patloew.rxlocation.RxLocation
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_orders.*
-import kotlinx.coroutines.experimental.launch
-import net.ralphpina.permissionsmanager.PermissionsManager
 import java.util.*
 
 class OrderProviderActivity : BaseActivity() {
@@ -45,8 +44,11 @@ class OrderProviderActivity : BaseActivity() {
             val count = intent?.getIntExtra("count", 0)
             var resId = R.string.service_request
 
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            orderProviderAdapter = OrderProviderAdapter(type, object : OrderProviderAdapter.OnItemClick {
+            recyclerView.layoutManager = CustomLinearLayoutManager(this)
+            recyclerView.setOnClickListener{
+
+            }
+            orderProviderAdapter = OrderProviderAdapter(type,this, object : OrderProviderAdapter.OnItemClick {
                 override fun onClick(bean: OrderResult, action: Int) {
                     when (action) {
                         OrderProviderAdapter.NONE -> {
