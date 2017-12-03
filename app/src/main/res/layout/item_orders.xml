@@ -10,6 +10,7 @@
     android:layout_marginTop="@dimen/_3sdp"
     android:background="@color/colorWhite"
     android:layoutDirection="ltr"
+    android:id="@+id/serviceContainer"
     android:orientation="horizontal">
 
     <com.gropse.serviceme.widget.CircleImageView

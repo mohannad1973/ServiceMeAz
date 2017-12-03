@@ -55,6 +55,7 @@ class OrderProviderAdapter(private var type: String?, private var listener: OnIt
             itemView.btnAccept.setOnClickListener(this)
             itemView.btnReject.setOnClickListener(this)
             itemView.btnFeedback.setOnClickListener(this)
+            itemView.serviceContainer.setOnClickListener(this)
 
             if (list.size > 0) {
                 object : CountDownTimer((list[0].createdDate) * 1000, 1000) {
@@ -145,6 +146,7 @@ class OrderProviderAdapter(private var type: String?, private var listener: OnIt
                 R.id.btnAccept -> ACCEPT
                 R.id.btnReject -> REJECT
                 R.id.btnFeedback -> FEEDBACK
+                R.id.serviceContainer -> NONE
                 else -> NONE
             })
         }
