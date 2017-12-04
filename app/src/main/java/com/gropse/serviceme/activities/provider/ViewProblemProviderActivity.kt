@@ -1,5 +1,6 @@
 package com.gropse.serviceme.activities.provider
 
+//import paytabs.project.PayTabActivity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -15,10 +16,10 @@ import com.gropse.serviceme.pojo.*
 import com.gropse.serviceme.utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.dialog_payment_layout.view.*
 import kotlinx.android.synthetic.main.activity_view_problem_provider.*
-//import paytabs.project.PayTabActivity
+import kotlinx.android.synthetic.main.dialog_payment_layout.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ViewProblemProviderActivity : BaseActivity() {
@@ -52,28 +53,41 @@ class ViewProblemProviderActivity : BaseActivity() {
         val beanArray = bean.files ?: ArrayList()
         val imageViews: ArrayList<ImageView> = ArrayList(Arrays.asList(ivImage1, ivImage2, ivImage3))
         val videoViews: ArrayList<ImageView> = ArrayList(Arrays.asList(ivVideo1, ivVideo2, ivVideo3))
-        ivVideo1
+
+        var imageList: ArrayList<String> = arrayListOf()
+        var videoList: ArrayList<String> = arrayListOf()
         beanArray.forEachIndexed { index, viewProblemFiles ->
             run {
                 if (viewProblemFiles.type == 0) {
-                    imageViews[index].loadUrl(viewProblemFiles.url)
-                    imageViews[index].setOnClickListener {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewProblemFiles.url)))
-                    }
+                    imageList.add(viewProblemFiles.url)
+                } else {
+                    videoList.add(viewProblemFiles.url)
                 }
             }
         }
-        beanArray.forEachIndexed { index, viewProblemFiles ->
+
+
+
+        imageList.forEachIndexed { index, image ->
             run {
-                if (viewProblemFiles.type == 1) {
-                    videoViews[index].setImageDrawable(resources.getDrawable(R.drawable.ic_play))
-                    videoViews[index].setOnClickListener {
-                        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(viewProblemFiles.url)))
-                    }
+                imageViews[index].loadUrl(image)
+                imageViews[index].setOnClickListener {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(image)))
+                }
+
+            }
+        }
+        videoList.forEachIndexed { index, video ->
+            run {
+                videoViews[index].setImageDrawable(resources.getDrawable(R.drawable.ic_play))
+                videoViews[index].setOnClickListener {
+                    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(video)))
+
                 }
             }
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
