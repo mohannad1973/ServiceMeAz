@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layoutDirection="ltr"
     android:orientation="vertical"
+    android:background="#ffffff"
     tools:context="com.gropse.serviceme.activities.both.OptionActivity">
 
     <LinearLayout

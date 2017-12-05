@@ -187,16 +187,16 @@ class SubscriptionPlanActivity : BaseActivity() {
                         var plan3: SubscriptionPlanResult = SubscriptionPlanResult()
                         var plan4: SubscriptionPlanResult = SubscriptionPlanResult()
                         for (x in 0 until bean.size) {
-                            if (bean!!.get(x).name.contains("1")) {
+                            if (bean!!.get(x).name.contains(" 1 ")) {
                                 plan1 = bean!!.get(x)
                                 plan1.name = resources.getText(R.string.plan1) as String
-                            } else if (bean!!.get(x).name.contains("3")) {
+                            } else if (bean!!.get(x).name.contains(" 3 ")) {
                                 plan2 = bean!!.get(x)
                                 plan2.name = resources.getText(R.string.plan2) as String
-                            } else if (bean!!.get(x).name.contains("6")) {
+                            } else if (bean!!.get(x).name.contains(" 6 ")) {
                                 plan3 = bean!!.get(x)
                                 plan3.name = resources.getText(R.string.plan3) as String
-                            } else if (bean!!.get(x).name.contains("12")) {
+                            } else if (bean!!.get(x).name.contains(" 12 ")) {
                                 plan4 = bean!!.get(x)
                                 plan4.name = resources.getText(R.string.plan4) as String
                             }
