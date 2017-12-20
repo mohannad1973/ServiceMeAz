@@ -3,16 +3,21 @@ package com.gropse.serviceme.activities.both
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.gropse.serviceme.R
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.ServiceGenerator
 import com.gropse.serviceme.pojo.BaseResponse
 import com.gropse.serviceme.pojo.ChangePassRequest
+import com.gropse.serviceme.pojo.ForgotResult
 import com.gropse.serviceme.pojo.OtpRequest
 import com.gropse.serviceme.utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_change_password.*
+import org.json.JSONObject
 
 class ChangePasswordActivity : BaseActivity() {
 
@@ -20,6 +25,7 @@ class ChangePasswordActivity : BaseActivity() {
     private var otpRequest = OtpRequest()
     private var changePassRequest = ChangePassRequest()
     var type = AppConstants.RESET_PASSWORD
+    var userType = AppConstants.TYPE_USER
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_password)
@@ -30,10 +36,20 @@ class ChangePasswordActivity : BaseActivity() {
         etNewPassword.circularBorderDrawable(5)
         etConfirmPassword.circularBorderDrawable(5)
 
+
+        if (intent.hasExtra(AppConstants.TYPE)) {
+            userType = intent.getIntExtra(AppConstants.TYPE,AppConstants.TYPE_USER)
+        }
+
         btnDone.circularDrawable()
 
+
+
         btnDone.setOnClickListener {
-            if (Prefs(mActivity).userType == AppConstants.TYPE_USER) {
+            println("úsm_user_type= "+type+"',userType= "+userType);
+           // if (Prefs(mActivity).userType == AppConstants.TYPE_USER)
+                if (userType == AppConstants.TYPE_USER)
+            {
                 if (type == AppConstants.RESET_PASSWORD) {
                     changePasswordUser()
                 } else {
@@ -46,8 +62,8 @@ class ChangePasswordActivity : BaseActivity() {
                     updatePasswordProvider()
                 }
             }
-        }
 
+        }
         if (intent.hasExtra(OtpRequest::class.java.name))
             otpRequest = intent.getSerializableExtra(OtpRequest::class.java.name) as OtpRequest
         if (intent.hasExtra(AppConstants.SCREEN)) {
@@ -78,10 +94,15 @@ class ChangePasswordActivity : BaseActivity() {
             otpRequest.mobile = if (otpRequest.mobile.isNotBlank()) otpRequest.mobile else Prefs(this).mobile
             changePassRequest.userId = Prefs(this).userId
             changePassRequest.providerType = Prefs(this).userType
+
+
+            println("úsm_otpRequest : mobile= "+otpRequest.mobile+"',password= "+otpRequest.password);
+
             return true
         }
 
     private fun changePasswordProvider() {
+        println("úsm_otpRequestprovider_before : mobile= "+otpRequest.mobile+"',password= "+otpRequest.password);
         if (isValid) {
             progressBar.visible()
             frameLayout.visible()
@@ -99,6 +120,7 @@ class ChangePasswordActivity : BaseActivity() {
     }
 
     private fun updatePasswordProvider() {
+        println("úsm_otpRequest_provider_update_before : mobile= "+otpRequest.mobile+"',password= "+otpRequest.password);
         if (isValid) {
             progressBar.visible()
             frameLayout.visible()
@@ -116,7 +138,9 @@ class ChangePasswordActivity : BaseActivity() {
     }
 
     private fun changePasswordUser() {
+        println("úsm_otpRequest_before : mobile= "+otpRequest.mobile+"',password= "+otpRequest.password);
         if (isValid) {
+            println("úsm_otpRequest : mobile= "+otpRequest.mobile+"',password= "+otpRequest.password);
             progressBar.visible()
             frameLayout.visible()
             val client = ServiceGenerator.createService(NetworkClient::class.java)
@@ -134,6 +158,7 @@ class ChangePasswordActivity : BaseActivity() {
 
     private fun updatePasswordUser() {
         if (isValid) {
+            println("úsm_user_update : Password is updating"+userType);
             progressBar.visible()
             frameLayout.visible()
             val client = ServiceGenerator.createService(NetworkClient::class.java)
@@ -151,6 +176,8 @@ class ChangePasswordActivity : BaseActivity() {
 
     private fun onResponse(response: Any) {
         try {
+
+          //  val response = Gson().fromJson(removeHtmlTags(responseStr.toString()), BaseResponse::class.java)
             if (response is BaseResponse) {
                 when (response.errorCode) {
                     1 -> logout()

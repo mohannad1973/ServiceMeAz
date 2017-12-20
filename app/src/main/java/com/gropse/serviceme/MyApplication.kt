@@ -40,6 +40,11 @@ class MyApplication : MultiDexApplication() {
     var compositeDisposable: CompositeDisposable? = CompositeDisposable()
     var mCurrentActivity: Activity? = null
 
+    companion object {
+        lateinit var instance: MyApplication
+            private set
+    }
+
     override fun onCreate() {
         super.onCreate()
         MultiDex.install(this)
@@ -51,8 +56,21 @@ class MyApplication : MultiDexApplication() {
         if (Prefs(this).locale.equals("")) {
             Prefs(this).locale = "en"
         }
+
+        instance = this
     }
 
+    fun getLat(): Float{
+        return Prefs(this).latitude.toFloat()
+    }
+
+    fun getLon(): Float{
+        return Prefs(this).longitude.toFloat()
+    }
+
+    public fun setCurrentActivity(activity: Activity){
+        mCurrentActivity = activity
+    }
 
     public fun getCurrentActivity(): Activity?{
         return mCurrentActivity

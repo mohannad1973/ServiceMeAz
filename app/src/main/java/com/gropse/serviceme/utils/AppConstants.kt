@@ -20,6 +20,7 @@ object AppConstants {
     val SERVICE_OFFICE = "2"
 
     val SCREEN = "screen"
+    val TYPE = "type"
     val SERVICE_REQUEST = "1"
     val SCHEDULED_ORDERS = "2"
     val COMPLETED_ORDERS = "3"
@@ -27,6 +28,7 @@ object AppConstants {
     val CANCELLED_ORDERS = "5"
     val FAVOURITE_ORDERS = "6"
     val PENDING_ORDERS = "7"
+    val MISSING_ORDERS = "8"
 
     val RESET_PASSWORD = "1"
     val CHANGE_PASSWORD = "2"

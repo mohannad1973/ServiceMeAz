@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.ArrayAdapter
@@ -18,6 +19,8 @@ import com.google.android.gms.location.places.ui.PlacePicker
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.gropse.serviceme.R
+import com.gropse.serviceme.R.id.llCompany
+import com.gropse.serviceme.R.id.tvServices
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.activities.both.LoginActivity
 import com.gropse.serviceme.activities.both.MobileVerificationActivity
@@ -41,6 +44,8 @@ import okhttp3.RequestBody
 import org.json.JSONObject
 import java.io.File
 import java.util.ArrayList
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 
 class SignUpProviderActivity : BaseActivity() {
@@ -86,8 +91,11 @@ class SignUpProviderActivity : BaseActivity() {
         etWebsite.drawable(R.drawable.ic_web)
         tvServices.drawable(R.drawable.ic_service)
 
-        etCode.setText(Prefs(this).countryCode)
+       // etCode.setText(Prefs(this).countryCode)
         etName.requestFocus()
+      //  etCode.setText(resources.configuration.locale.country)
+        etCode.setText("+966");
+        etCode.isEnabled=false
 
         tvLogin.spannableText(getString(R.string.already_have_an_account_login, getString(R.string.login)), getString(R.string.login))
         tvLogin.setOnClickListener({ startActivity(Intent(this, LoginActivity::class.java)) })
@@ -140,6 +148,15 @@ class SignUpProviderActivity : BaseActivity() {
             signUpRequest.providerType = AppConstants.TYPE_PROVIDER_COMPANY
             etName.drawable(R.drawable.ic_company)
             etName.hint = getString(R.string.company_name)
+
+//            if (Prefs(this).userType == 0)
+//                signUpRequest.type = "individualProvider"
+//
+//            else if (Prefs(this).userType == 1)
+//                signUpRequest.type = "companyProvider"
+//
+//            else
+//                signUpRequest.type = "user"
         }
 
         ivProfile.setOnClickListener { showImageChooser() }
@@ -236,7 +253,7 @@ class SignUpProviderActivity : BaseActivity() {
         signUpRequest.city = etCity.string()
         signUpRequest.location = tvLocation.string()
         signUpRequest.registrationNo = etRegistration.string()
-        signUpRequest.website = etWebsite.string()
+        signUpRequest.website = etWebsite.string().trim()
         signUpRequest.licenseNo = etLicense.string()
 //        signUpRequest.services = etServices.string()
         signUpRequest.deviceType = NetworkConstants.DEVICE_TYPE
@@ -244,10 +261,11 @@ class SignUpProviderActivity : BaseActivity() {
         signUpRequest.deviceToken = Prefs(mActivity).deviceToken
         val confPass = etConfirmPassword.string()
 
-        if (signUpRequest.image.isBlank()) {
+        /*if (signUpRequest.image.isBlank()) {
             toast(R.string.message_select_profile_image)
             return false
-        } else if (signUpRequest.name.isBlank()) {
+        } else */
+            if (signUpRequest.name.isBlank()) {
             toast(R.string.message_enter_name)
             return false
         } else if (signUpRequest.email.isBlank()) {
@@ -280,7 +298,7 @@ class SignUpProviderActivity : BaseActivity() {
         } else if (llCompany.visibility == 0 && signUpRequest.registrationNo.isBlank()) {
             toast(R.string.message_enter_reg_no)
             return false
-        } else if (llCompany.visibility == 0 && Patterns.WEB_URL.matcher(signUpRequest.website).matches()) {
+        } else if (llCompany.visibility == 0 && !Patterns.WEB_URL.matcher(signUpRequest.website).matches()) {
             toast(R.string.message_enter_valid_website)
             return false
         } else if (signUpRequest.licenseNo.isBlank()) {
@@ -295,6 +313,8 @@ class SignUpProviderActivity : BaseActivity() {
         }
         return true
     }
+
+
 
     private fun showServiceDialog() {
         val view = layoutInflater.inflate(R.layout.dialog_service_list, null)
@@ -388,6 +408,7 @@ class SignUpProviderActivity : BaseActivity() {
 
     private fun onResponse(response: Any, resType: String = "") {
         try {
+            Log.d("usm_response","provider= "+response);
             if (response is BaseResponse) {
                 when (response.errorCode) {
                     1 -> logout()
@@ -403,6 +424,7 @@ class SignUpProviderActivity : BaseActivity() {
                         } else if (resType.isBlank()) {
                             val intent = Intent(mActivity, MobileVerificationActivity::class.java)
                             intent.putExtra(SignUpRequest::class.java.name, signUpRequest)
+                            intent.putExtra("isUser",false)
                             startActivity(intent)
                         }
                     }

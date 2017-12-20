@@ -74,8 +74,13 @@ class SignUpUserActivity : BaseActivity() {
         etCity.drawable(R.drawable.ic_pin)
         tvLocation.drawable(R.drawable.ic_pin)
 
-        etCode.setText(Prefs(this).countryCode)
+        //etCode.setText(Prefs(this).countryCode)
         etFullName.requestFocus()
+
+      //  etCode.setText(resources.configuration.locale.country)
+        etCode.setText("+966");
+        etCode.isEnabled=false
+
 
         mFacebookManager = FacebookManager(mActivity, object : OnSocialLoginListener {
             override fun onSocialLogin(bean: SocialBean) {
@@ -240,12 +245,22 @@ class SignUpUserActivity : BaseActivity() {
         signUpRequest.deviceType = NetworkConstants.DEVICE_TYPE
         signUpRequest.deviceId = Prefs(mActivity).deviceId
         signUpRequest.deviceToken = Prefs(mActivity).deviceToken
-        if (!isNetworkAvailable(true)) {
-            return false
-        } else if (signUpRequest.type == AppConstants.LOGIN_TYPE_EMAIL && signUpRequest.image.isBlank()) {
+
+
+
+        /*
+
+        else if (signUpRequest.type == AppConstants.LOGIN_TYPE_EMAIL && signUpRequest.image.isBlank()) {
             toast(R.string.message_select_profile_image)
             return false
-        } else if (signUpRequest.name.isBlank()) {
+        }
+
+         */
+
+
+        if (!isNetworkAvailable(true)) {
+            return false
+        }  else if (signUpRequest.name.isBlank()) {
             toast(R.string.message_enter_name)
             return false
         } else if (signUpRequest.email.isBlank()) {
@@ -333,6 +348,8 @@ class SignUpUserActivity : BaseActivity() {
 
     private fun onResponse(response: Any, resType: String = "") {
         try {
+            println("usm_response_user data= "+response);
+
             if (response is BaseResponse) {
                 when (response.errorCode) {
                     1 -> logout()

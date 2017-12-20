@@ -14,6 +14,8 @@ import com.gropse.serviceme.fragment.BaseFragment
 import com.gropse.serviceme.fragment.provider.CurrentServiceProviderFragment
 import com.gropse.serviceme.fragment.provider.ProfileProviderFragment
 import com.gropse.serviceme.fragment.provider.HomeProviderFragment
+import com.gropse.serviceme.fragment.user.CurrentProOngoingServiceFrag
+import com.gropse.serviceme.utils.Prefs
 import com.gropse.serviceme.utils.toast
 import kotlinx.android.synthetic.main.activity_home_provider.*
 
@@ -25,7 +27,9 @@ class HomeProviderActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_provider)
+
         mActivity = this
+        //val token = Prefs(mActivity).deviceToken
         setUpToolbar(R.string.home, false)
 
         changeFragment(0)
@@ -66,7 +70,8 @@ class HomeProviderActivity : BaseActivity() {
                 (newFragment as BaseFragment).loadScreenData()
             }
             1 -> {
-                newFragment = CurrentServiceProviderFragment.newInstance()
+//                newFragment = CurrentServiceProviderFragment.newInstance()
+                newFragment = CurrentProOngoingServiceFrag.newInstance()
             }
             2 -> {
                 newFragment = ProfileProviderFragment.newInstance()
@@ -131,7 +136,7 @@ class HomeProviderActivity : BaseActivity() {
             super.onBackPressed()
         } else {
             backPressed = System.currentTimeMillis()
-           toast(R.string.press_once_again_to_exit)
+            toast(R.string.press_once_again_to_exit)
         }
     }
 }

@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog
 import android.util.Log
 import com.google.android.gms.location.LocationRequest
 import com.google.gson.Gson
+import com.gropse.serviceme.MyApplication
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.network.NetworkClient
@@ -91,10 +92,18 @@ class CurrentServiceProviderActivity : BaseActivity() {
     }
 
     private fun updateUI(bean: OrderResult) {
+
+        val geo = CustomGeocoder()
+
+        val currentLat = MyApplication.instance.getLat()
+        val currentLon = MyApplication.instance.getLon()
+
+        val distanceFl = geo.kmDistanceBetweenPoints(currentLat, currentLon, bean.latitude.toFloat(), bean.longitude.toFloat())
+
         ivProvider.loadUrl(bean.image)
         tvName.text = bean.name
         tvAddress.text = bean.address
-        tvDistance.roundDecimal(bean.distance)
+        tvDistance.roundDecimal(distanceFl)
         tvServiceType.text = bean.serType
         tvLocation.text = bean.location
         tvPhoneNumber.text = bean.phone

@@ -8,6 +8,7 @@ import android.util.Log
 import com.google.android.gms.location.LocationRequest
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.gropse.serviceme.MyApplication
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.activities.both.ReviewRatingActivity
@@ -36,8 +37,11 @@ class OrderProviderActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_orders)
 
+
         commonRequest.userId = Prefs(this).userId
         commonRequest.providerType = Prefs(this).userType
+        commonRequest.latitude = Prefs(this).latitude
+        commonRequest.longitude = Prefs(this).longitude
 
         if (intent.hasExtra(AppConstants.SCREEN)) {
             val type = intent.getStringExtra(AppConstants.SCREEN)
@@ -79,10 +83,11 @@ class OrderProviderActivity : BaseActivity() {
                             }
                         }
                         OrderProviderAdapter.ACCEPT -> {
-                            if (bean.timeLeft != -1L) {
+                            //if (bean.timeLeft != -1L) {
                                 commonRequest.serId = bean.serId
+                            commonRequest.transactionId = "123456789"
                                 acceptProvider()
-                            }
+                            //}
                         }
                         OrderProviderAdapter.REJECT -> {
 //                            if (bean.timeLeft != -1L) {
@@ -139,6 +144,12 @@ class OrderProviderActivity : BaseActivity() {
                     resId = R.string.ongoing_orders
                     ongoingProvider()
                 }
+
+                AppConstants.MISSING_ORDERS -> {
+                    resId = R.string.missing_orders
+                    missingProvider()
+                }
+
             }
             setUpToolbar(resId)
             tvTotal.text = String.format("%s %s (%d)", getString(R.string.total), getString(resId), count)
@@ -176,6 +187,7 @@ class OrderProviderActivity : BaseActivity() {
         if (isNetworkAvailable()) {
             progressBar.visible()
             val client = ServiceGenerator.createService(NetworkClient::class.java)
+            val request = commonRequest.toString()
             val disposable = client.requestsProvider(Prefs(this).deviceId, Prefs(this).securityToken, commonRequest)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -252,6 +264,22 @@ class OrderProviderActivity : BaseActivity() {
         }
     }
 
+    private fun missingProvider() {
+        if (isNetworkAvailable()) {
+            progressBar.visible()
+            val client = ServiceGenerator.createService(NetworkClient::class.java)
+            val disposable = client.missingProvider(Prefs(this).deviceId, Prefs(this).securityToken, commonRequest)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response ->
+                        onResponse(response)
+                    }, { throwable ->
+                        onError(throwable)
+                    })
+            compositeDisposable?.add(disposable)
+        }
+    }
+
     private fun acceptProvider() {
         if (isNetworkAvailable()) {
             progressBar.visible()
@@ -261,6 +289,7 @@ class OrderProviderActivity : BaseActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->
                         onResponse(response)
+                        requestsProvider()
                     }, { throwable ->
                         onError(throwable)
                     })

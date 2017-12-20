@@ -62,13 +62,35 @@ class CreateRequestActivity : BaseActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_create_request)
         setUpToolbar(R.string.new_request)
 
-        if (intent.hasExtra(CategoryResult::class.java.name)) {
-            val bean = intent.getSerializableExtra(CategoryResult::class.java.name) as CategoryResult
+        val isBookAgain = intent.getBooleanExtra("IS_BOOK_AGAIN", false)
 
-            tvService.text = bean.name
-            addServiceRequest.serName = bean.name
-            addServiceRequest.serCatId = bean.catId
+        if (isBookAgain){
+
+            if (intent.hasExtra(OrderResult::class.java.name)) {
+                val bean = intent.getSerializableExtra(OrderResult::class.java.name) as OrderResult
+
+                tvService.text = bean.serName
+                etDescription.setText(bean.description)
+
+                addServiceRequest.serCatId = bean.serId
+                addServiceRequest.serName = bean.serName
+                addServiceRequest.latitude = bean.latitude
+                addServiceRequest.longitude = bean.longitude
+                addServiceRequest.location = bean.address
+            }
+
+        }else{
+
+            if (intent.hasExtra(CategoryResult::class.java.name)) {
+                val bean = intent.getSerializableExtra(CategoryResult::class.java.name) as CategoryResult
+
+                tvService.text = bean.name
+                addServiceRequest.serName = bean.name
+                addServiceRequest.serCatId = bean.catId
+            }
+
         }
+
 
         ivPin.loadUrl("http://maps.google.com/mapfiles/ms/icons/red-dot.png")
         tvService.circularBorderDrawable(5)

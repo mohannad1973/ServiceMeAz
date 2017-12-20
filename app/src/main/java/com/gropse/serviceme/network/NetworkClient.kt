@@ -1,5 +1,6 @@
 package com.gropse.serviceme.network
 
+import com.google.gson.JsonObject
 import com.gropse.serviceme.pojo.*
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -71,6 +72,13 @@ interface NetworkClient {
             @Header("device_id") deviceId: String,
             @Header("security_token") securityToken: String,
             @Body request: ChangePassRequest
+    ): Observable<BaseResponse>
+
+    @POST(NetworkConstants.CHANGE_LANGUAGE)
+    fun changeLanguage(
+            @Header("device_id") deviceId: String,
+            @Header("security_token") securityToken: String,
+            @Body request: ChangeLangRequest
     ): Observable<BaseResponse>
 
     @POST(NetworkConstants.API_UPDATE_PASSWORD_USER)
@@ -189,6 +197,13 @@ interface NetworkClient {
 
     @POST(NetworkConstants.API_ONGOING_PROVIDER)
     fun ongoingProvider(
+            @Header("device_id") deviceId: String,
+            @Header("security_token") securityToken: String,
+            @Body request: CommonRequest
+    ): Observable<BaseResponse>
+
+    @POST(NetworkConstants.API_MISSING_PROVIDER)
+    fun missingProvider(
             @Header("device_id") deviceId: String,
             @Header("security_token") securityToken: String,
             @Body request: CommonRequest

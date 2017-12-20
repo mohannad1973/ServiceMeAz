@@ -35,6 +35,7 @@ object NetworkConstants {
     const val CONTACT_US = "contactUs"
     const val API_SIGN_UP_CHECK_PROVIDER = "signUpCheck" + PROVIDER
     const val API_SIGN_UP_PROVIDER = "signUp" + PROVIDER
+    const val CHANGE_LANGUAGE = "change_language" + USER
     const val API_LOGIN_PROVIDER = LOGIN + PROVIDER
     const val API_FORGET_PASSWORD_PROVIDER = FORGET_PASSWORD + PROVIDER
     const val API_UPDATE_PASSWORD_PROVIDER = UPDATE_PASSWORD + PROVIDER
@@ -49,6 +50,7 @@ object NetworkConstants {
     const val API_COMPLETED_PROVIDER = COMPLETED + PROVIDER
     const val API_CANCELLED_PROVIDER = CANCELLED + PROVIDER
     const val API_ONGOING_PROVIDER = ONGOING + PROVIDER
+    const val API_MISSING_PROVIDER = "reject_services" + PROVIDER
     const val API_ACCEPT_PROVIDER = "accept" + PROVIDER
     const val API_REJECT_PROVIDER = "reject" + PROVIDER
     const val API_FEEDBACK_PROVIDER = FEEDBACK + PROVIDER

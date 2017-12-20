@@ -88,6 +88,7 @@
     <string name="scheduled_order">شیڈول آرڈر</string>
     <string name="completed_order">مکمل آرڈر</string>
     <string name="ongoing_orders">آن لائننگ آرڈر</string>
+    <string name="missing_orders">لاپتہ حکم</string>
     <string name="cancelled_orders">منسوخ شدہ حکم</string>
     <string name="service_for_offices">دفتری خدمات</string>
     <string name="service_for_homes">گھروں کے لئے سروس</string>
@@ -193,7 +194,7 @@
     <string name="str_renew">دوبارہ نیا</string>
     <string name="str_terms"><![CDATA[شرائط و ضوابط]]></string>
     <string name="about_us">ہمارے بارے میں</string>
-    <string name="str_login">سروس مجھے لاگ ان</string>
+    <string name="str_login">میں لاگ ان کریں</string>
     <string name="str_about_us">کے بارے میں</string>
     <string name="str_contact_us">ہم سے رابطہ کریں</string>
     <string name="message_enter_phone">برائے مہربانی فون نمبر درج کریں.</string>

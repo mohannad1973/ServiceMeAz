@@ -15,11 +15,14 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.google.gson.Gson
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.provider.HomeProviderActivity
+import com.gropse.serviceme.activities.provider.SignUpProviderActivity
 import com.gropse.serviceme.activities.user.HomeUserActivity
+import com.gropse.serviceme.activities.user.SignUpUserActivity
 import com.gropse.serviceme.network.NetworkClient
 import com.gropse.serviceme.network.NetworkConstants
 import com.gropse.serviceme.network.ServiceGenerator
 import com.gropse.serviceme.pojo.BaseResponse
+import com.gropse.serviceme.pojo.ChangeLangRequest
 import com.gropse.serviceme.pojo.LoginRequest
 import com.gropse.serviceme.pojo.ProfileResult
 import com.gropse.serviceme.socaillogin.FacebookManager
@@ -44,6 +47,7 @@ class LoginActivity : BaseActivity() {
     private var mGoogleApiClient: GoogleApiClient? = null
     private var mFacebookManager: FacebookManager? = null
     private var twitterManager: TwitterManager? = null
+    private var isLanguagedChanged: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,8 +141,11 @@ class LoginActivity : BaseActivity() {
             }
         }
         tvSignUp.setOnClickListener {
-            startActivity(Intent(this, OptionActivity::class.java))
-            finishAffinity()
+            if (isUser)
+                startActivity(Intent(this, SignUpUserActivity::class.java))
+            else
+                startActivity(Intent(this, SignUpProviderActivity::class.java))
+            //finishAffinity()
         }
         tvForget.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
@@ -185,6 +192,7 @@ class LoginActivity : BaseActivity() {
         loginRequest.deviceType = NetworkConstants.DEVICE_TYPE
         loginRequest.deviceId = Prefs(mActivity).deviceId
         loginRequest.deviceToken = Prefs(mActivity).deviceToken
+        loginRequest.playerId = Prefs(mActivity).deviceToken
         if (!isNetworkAvailable(true)) {
             return false
         } else if (loginRequest.email.isBlank()) {
@@ -195,13 +203,46 @@ class LoginActivity : BaseActivity() {
             return false
         } else if (loginRequest.type == AppConstants.LOGIN_TYPE_EMAIL && loginRequest.password.isBlank()) {
             toast(R.string.message_enter_password)
-            return false
+
+
         } else if (loginRequest.type == AppConstants.LOGIN_TYPE_EMAIL && loginRequest.password.length < resources.getInteger(R.integer.password_min) || loginRequest.password.length > resources.getInteger(R.integer.password_max)) {
             toast(R.string.message_password_invalid)
             return false
         }
         return true
     }
+
+    fun sendLangOnServer() {
+
+        if (isNetworkAvailable()) {
+            this.runOnUiThread { mProgressDialog?.show() }
+
+            val langRequest     = ChangeLangRequest()
+            langRequest.lang    = Prefs(this).locale
+            langRequest.userId  = Prefs(this).userId
+
+            if (Prefs(this).userType == 0)
+                langRequest.type = "individualProvider"
+
+            else if (Prefs(this).userType == 1)
+                langRequest.type = "companyProvider"
+
+            else
+                langRequest.type = "user"
+
+            val client = ServiceGenerator.createService(NetworkClient::class.java)
+            val disposable = client.changeLanguage(Prefs(this).deviceId, Prefs(this).securityToken, langRequest)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response ->
+                        onResponse(response)
+                    }, { throwable ->
+                        onError(throwable)
+                    })
+            compositeDisposable?.add(disposable)
+        }
+    }
+
 
     private fun loginUser() {
         if (isValidData()) {
@@ -261,6 +302,7 @@ class LoginActivity : BaseActivity() {
                     1 -> logout()
                     3 -> toast(response.message)
                     200 -> {
+
                         if (response.obj.isJsonObject) {
                             val bean = Gson().fromJson(response.obj.asJsonObject.toString(), ProfileResult::class.java)
                             Prefs(mActivity).login = true

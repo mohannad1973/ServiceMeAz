@@ -40,7 +40,7 @@ class ActivitiesFragment : BaseFragment() {
     private var date = ""
     private var time = ""
     private val LIKE = "like"
-    private val BOOK_AGAIN = "book_again"
+    private val _AGAIN = "_again"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +57,9 @@ class ActivitiesFragment : BaseFragment() {
         (activity as HomeUserActivity).setUpToolbar(R.string.activity, false)
 
         commonRequest.userId = Prefs(activity).userId
+        commonRequest.latitude = Prefs(activity).latitude
+        commonRequest.longitude = Prefs(activity).longitude
+
 
 
         tvPending.circularDrawable()
@@ -142,7 +145,10 @@ class ActivitiesFragment : BaseFragment() {
                         startActivity(intent)
                     }
                     OrderUserAdapter.BOOK_AGAIN -> {
-
+                        val intent = Intent(activity, CreateRequestActivity::class.java)
+                        intent.putExtra("IS_BOOK_AGAIN", true)
+                        intent.putExtra(OrderResult::class.java.name, bean)
+                        startActivity(intent)
                     }
                 }
             }
@@ -169,6 +175,7 @@ class ActivitiesFragment : BaseFragment() {
     private fun pendingUser() {
         if (activity.isNetworkAvailable()) {
             progressBar.visible()
+            val request = commonRequest.toString()
             val client = ServiceGenerator.createService(NetworkClient::class.java)
             val disposable = client.pendingUser(Prefs(activity).deviceId, Prefs(activity).securityToken, commonRequest)
                     .subscribeOn(Schedulers.io())
@@ -291,7 +298,7 @@ class ActivitiesFragment : BaseFragment() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->
-                        onResponse(response, BOOK_AGAIN)
+                        onResponse(response, _AGAIN)
                     }, { throwable ->
                         onError(throwable)
                     })
@@ -324,7 +331,7 @@ class ActivitiesFragment : BaseFragment() {
                             orderResult.isFavourite = commonRequest.value
                             orderUserAdapter.notifyDataSetChanged()
                         }
-                        else if (response.obj.isJsonObject && resType == BOOK_AGAIN) {
+                        else if (response.obj.isJsonObject && resType == _AGAIN) {
                             val bean = Gson().fromJson(response.obj.asJsonObject.toString(), CategoryResult::class.java)
                             val intent = Intent(activity, CreateRequestActivity::class.java)
                             intent.putExtra(CategoryResult::class.java.name, bean)

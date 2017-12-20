@@ -96,6 +96,13 @@ class HomeProviderFragment : BaseFragment() {
             startActivityForResult(intent, 111)
         }
 
+        llMissing.setOnClickListener {
+            val intent = Intent(activity, OrderProviderActivity::class.java)
+            intent.putExtra(AppConstants.SCREEN, AppConstants.MISSING_ORDERS)
+            intent.putExtra("count", bean.missing)
+            startActivity(intent)
+        }
+
         commonRequest.userId = Prefs(activity).userId
         commonRequest.providerType = Prefs(activity).userType
 
@@ -133,6 +140,7 @@ class HomeProviderFragment : BaseFragment() {
         tvCompleted.text = String.format("%s (%d)", getString(R.string.completed_order), bean.completed)
         tvOnGoing.text = String.format("%s (%d)", getString(R.string.ongoing_orders), bean.ongoing)
         tvCancelled.text = String.format("%s (%d)", getString(R.string.cancelled_orders), bean.cancelled)
+        tvMissing.text = String.format("%s (%d)", getString(R.string.missing_orders), bean.missing)
         if (bean.readyStatus == 1) {
             ready()
         } else {

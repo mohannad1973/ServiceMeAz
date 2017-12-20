@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.gropse.serviceme.MyApplication
 import com.gropse.serviceme.R
 import com.gropse.serviceme.pojo.OrderResult
 import com.gropse.serviceme.utils.*
@@ -14,6 +15,11 @@ import java.util.*
 class OrderUserAdapter(private var listener: OnItemClick?) : RecyclerView.Adapter<OrderUserAdapter.CategoryViewHolder>() {
     private val list = ArrayList<OrderResult>()
     private var type: String = AppConstants.PENDING_ORDERS
+
+    private val geo = CustomGeocoder()
+
+    var currentLat = 0.0f
+    var currentLon = 0.0f
 
     companion object {
         val NONE = 0
@@ -62,6 +68,9 @@ class OrderUserAdapter(private var listener: OnItemClick?) : RecyclerView.Adapte
             itemView.tvFeedback.setOnClickListener(this)
             itemView.tvBookAgain.setOnClickListener(this)
             itemView.ivLike.setOnClickListener(this)
+
+            currentLat = MyApplication.instance.getLat()
+            currentLon = MyApplication.instance.getLon()
         }
 
         fun onBind(position: Int) {
@@ -74,11 +83,15 @@ class OrderUserAdapter(private var listener: OnItemClick?) : RecyclerView.Adapte
             itemView.ivLike.tag = position
 
             val bean = list[position]
+
+            val distanceFl = geo.kmDistanceBetweenPoints(currentLat, currentLon, bean.latitude.toFloat(), bean.longitude.toFloat())
+
+
             itemView.ivImage.loadUrl(bean.image)
             itemView.ivLike.drawable(if (bean.isFavourite == 1) R.drawable.ic_favorite_primary else R.drawable.ic_favorite_grey)
             itemView.tvNameUser.text = bean.name
             itemView.tvLocationUser.text = bean.location
-            itemView.tvDistanceUser.roundDecimal(bean.distance)
+            itemView.tvDistanceUser.roundDecimal(distanceFl)
             itemView.squareBorderGradient(2, R.color.colorPrimary)
             itemView.tvStatus.circularDrawable()
             itemView.tvCancel.circularDrawable()

@@ -135,9 +135,10 @@
                         android:layout_height="@dimen/_35sdp"
                         android:background="@null"
                         android:gravity="center"
-                        android:hint="@string/mobile"
+                        android:hint="@string/mobile_placeholder"
                         android:inputType="phone"
                         android:maxLines="1"
+                        android:maxLength="9"
                         android:paddingEnd="@dimen/_25sdp"
                         android:paddingStart="@dimen/_25sdp" />
 

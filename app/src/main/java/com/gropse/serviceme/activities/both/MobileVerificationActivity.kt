@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.google.gson.Gson
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.provider.HomeProviderActivity
@@ -17,6 +19,7 @@ import com.gropse.serviceme.utils.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_mobile_verification.*
+import java.util.logging.Logger
 
 
 class MobileVerificationActivity : BaseActivity() {
@@ -29,7 +32,7 @@ class MobileVerificationActivity : BaseActivity() {
         setContentView(R.layout.activity_mobile_verification)
         mActivity = this
         setUpToolbar(R.string.mobile_verification)
-
+;
         if (intent.hasExtra(SignUpRequest::class.java.name))
             signUpRequest = intent.getSerializableExtra(SignUpRequest::class.java.name) as SignUpRequest
 
@@ -49,6 +52,7 @@ class MobileVerificationActivity : BaseActivity() {
 
         etMobile.setText(signUpRequest.mobile)
         otpRequest.mobile = signUpRequest.mobile
+        otpRequest.lang = Prefs(this).locale
 
         btnResend.setOnClickListener {
             etOtp1.text.clear()
@@ -214,6 +218,8 @@ class MobileVerificationActivity : BaseActivity() {
 
     private fun onResponse(response: Any, resType: String = "") {
         try {
+            Log.d("usm_verify_otp","data= "+response);
+            println("usm_verify_otp data= "+response);
             if (response is BaseResponse) {
                 when (response.errorCode) {
                     1 -> logout()
@@ -227,22 +233,25 @@ class MobileVerificationActivity : BaseActivity() {
                             Prefs(mActivity).image = bean.image
                             Prefs(mActivity).mobile = bean.mobile
                             Prefs(mActivity).userType = if (bean.providerType.isNotBlank()) bean.providerType.toInt() else AppConstants.TYPE_USER
+                            //Prefs(mActivity).userType = if (signUpRequest.providerType == AppConstants.TYPE_PROVIDER_COMPANY || signUpRequest.providerType == AppConstants.TYPE_PROVIDER_INDIVIDUAL)  -2 else AppConstants.TYPE_USER
                             Prefs(mActivity).securityToken = bean.securityToken
 
-                            startActivity(Intent(mActivity, if (signUpRequest.providerType == AppConstants.TYPE_USER) HomeUserActivity::class.java else HomeProviderActivity::class.java))
+                            startActivity(Intent(mActivity, if (signUpRequest.providerType == AppConstants.TYPE_PROVIDER_COMPANY || signUpRequest.providerType == AppConstants.TYPE_PROVIDER_INDIVIDUAL) HomeProviderActivity::class.java else HomeUserActivity::class.java))
                             finishAffinity()
                         } else if (response.obj.isJsonObject && resType == ForgotResult::class.java.name) {
                             val bean = Gson().fromJson(response.obj.asJsonObject.toString(), ForgotResult::class.java)
                             otpRequest.securityToken = bean?.securityToken ?: ""
                         } else if (resType.isBlank()) {
-                            if (signUpRequest.providerType == AppConstants.TYPE_USER) {
+                            if (signUpRequest.providerType == AppConstants.TYPE_PROVIDER_INDIVIDUAL ||
+                                    signUpRequest.providerType == AppConstants.TYPE_PROVIDER_COMPANY) {
+                                signUpProvider()
+
+                            } else {
                                 if (signUpRequest.type == AppConstants.LOGIN_TYPE_EMAIL) {
                                     signUpUser()
                                 } else {
                                     signUpSocialUser()
                                 }
-                            } else {
-                                signUpProvider()
                             }
                         }
                     }

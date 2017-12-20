@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.gropse.serviceme.R
 import com.gropse.serviceme.pojo.Providers
+import com.gropse.serviceme.utils.CustomGeocoder
+import com.gropse.serviceme.utils.Prefs
 import com.gropse.serviceme.utils.loadUrl
 import com.gropse.serviceme.utils.roundDecimal
 import kotlinx.android.synthetic.main.list_item_service_provider_list.view.*
@@ -60,6 +62,7 @@ class ProviderListAdapter(private var listener: OnItemClick?) : RecyclerView.Ada
             itemView.ivImage.loadUrl(bean.image)
             itemView.tvWorkerName.text = bean.name
             itemView.tvDistance.roundDecimal(bean.distance)
+//            itemView.tvDistance.text = geo.kmDistanceBetweenPoints()
             itemView.btnPrice.text = "SAR 100"
         }
 

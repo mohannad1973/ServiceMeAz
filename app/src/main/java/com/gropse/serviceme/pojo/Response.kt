@@ -20,6 +20,7 @@ data class OrderResult(
         @SerializedName("description") var description: String = "",
         @SerializedName("distance") var distance: Double = 0.0,
         @SerializedName("ser_id") var serId: String = "",
+        @SerializedName("ser_name") var serName: String = "",
         @SerializedName("status") var status: Int = 0,
         @SerializedName("ser_time") var serTime: Long = 0,
         @SerializedName("created_date") var createdDate: Long = 0,
@@ -70,6 +71,7 @@ data class UserHomeResult(
 data class HomeResult(
         @SerializedName("requests") var requests: Int = 0,
         @SerializedName("cancelled") var cancelled: Int = 0,
+        @SerializedName("missing") var missing: Int = 0,
         @SerializedName("scheduled") var scheduled: Int = 0,
         @SerializedName("completed") var completed: Int = 0,
         @SerializedName("ongoing") var ongoing: Int = 0,
@@ -112,7 +114,8 @@ data class ProfileResult(
         @SerializedName("plan_time") var planTime: Long = 0,
         @SerializedName("transaction_type") var transactionType: Int = 0,
         @SerializedName("transaction_id") var transactionId: String = "",
-        @SerializedName("service") var service: String = ""
+        @SerializedName("service") var service: String = "",
+        @SerializedName("service_id") var serviceIDS: String = ""
 )
 
 data class CategoryResult(

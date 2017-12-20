@@ -9,12 +9,13 @@ data class LoginRequest(
         @SerializedName("device_type") var deviceType: String = "",
         @SerializedName("device_id") var deviceId: String = "",
         @SerializedName("device_token") var deviceToken: String = "",
+        @SerializedName("player_id") var playerId: String = "",
 
         @SerializedName("token") var token: String = "",
         @SerializedName("type") var type: String = "",
 
-        @SerializedName("latitude") var latitude: String = "",
-        @SerializedName("longitude") var longitude: String = ""
+        @SerializedName("latitude") var latitude: String = "0",
+        @SerializedName("longitude") var longitude: String = "0"
 )
 
 data class SignUpRequest(
@@ -26,6 +27,7 @@ data class SignUpRequest(
         @SerializedName("location") var location: String = "",
         @SerializedName("services") var services: String = "",
         @SerializedName("pro_type") var providerType: Int = -1,
+
         @SerializedName("device_type") var deviceType: String = "",
         @SerializedName("device_id") var deviceId: String = "",
         @SerializedName("device_token") var deviceToken: String = "",
@@ -49,6 +51,13 @@ data class SignUpRequest(
         @SerializedName("user_id") var userId: String = ""
 ) : Serializable
 
+data class ChangeLangRequest(
+        @SerializedName("user_id") var userId: String = "",
+        @SerializedName("lang") var lang: String = "",
+        @SerializedName("type") var type: String = ""
+
+) : Serializable
+
 data class EditProfileRequest(
         @SerializedName("name") var name: String = "",
         @SerializedName("mobile") var mobile: String = "",
@@ -56,7 +65,8 @@ data class EditProfileRequest(
         @SerializedName("pro_type") var providerType: Int = -1,
         @SerializedName("website") var website: String = "",
         @SerializedName("image") var image: String = "",
-        @SerializedName("user_id") var userId: String = ""
+        @SerializedName("user_id") var userId: String = "",
+        @SerializedName("services") var service: String = ""
 ) : Serializable
 
 data class EditProfileUserRequest(
@@ -71,6 +81,7 @@ data class OtpRequest(
         //FOR FORGOT PASSWORD, SEND OTP
         @SerializedName("email") var email: String = "",
         @SerializedName("mobile") var mobile: String = "",
+        @SerializedName("lang") var lang: String = "",
 
         //FOR VERIFY OTP
         @SerializedName("otp") var otp: String = "",

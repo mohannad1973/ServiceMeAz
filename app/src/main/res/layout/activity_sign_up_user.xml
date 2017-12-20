@@ -95,6 +95,7 @@
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_15sdp"
+            android:maxLength="9"
             android:orientation="horizontal">
 
             <android.support.v7.widget.AppCompatEditText
@@ -103,9 +104,10 @@
                 android:layout_height="@dimen/_35sdp"
                 android:background="@null"
                 android:gravity="center"
-                android:hint="@string/mobile"
+                android:hint="@string/mobile_placeholder"
                 android:inputType="phone"
                 android:maxLines="1"
+                android:maxLength="9"
                 android:paddingEnd="@dimen/_25sdp"
                 android:paddingStart="@dimen/_25sdp" />
 

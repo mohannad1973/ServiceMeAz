@@ -35,8 +35,8 @@
 
                 <LinearLayout
                     android:id="@+id/llLocation"
-                    android:layout_width="@dimen/_130sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_132sdp"
+                    android:layout_height="29dp"
                     android:background="@color/colorButton"
                     android:orientation="horizontal">
 
@@ -53,7 +53,7 @@
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/ivPin"
                         android:layout_width="@dimen/_16sdp"
-                        android:layout_height="@dimen/_16sdp"
+                        android:layout_height="21dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="@dimen/_2sdp"
                         android:background="@color/colorWhite"
@@ -63,8 +63,8 @@
 
                 <LinearLayout
                     android:id="@+id/llChangeLanguage"
-                    android:layout_width="@dimen/_110sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_125sdp"
+                    android:layout_height="29dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/colorButton"
                     android:orientation="horizontal">
@@ -207,29 +207,29 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/_14ssp" />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tvSignUpUser"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:text="@string/sign_up_as_user"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_14ssp" />
+        <!--<android.support.v7.widget.AppCompatTextView-->
+            <!--android:id="@+id/tvSignUpUser"-->
+            <!--android:layout_width="@dimen/_200sdp"-->
+            <!--android:layout_height="@dimen/_35sdp"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="@dimen/_15sdp"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/sign_up_as_user"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:textSize="@dimen/_14ssp" />-->
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tvSignUpProvider"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:text="@string/sign_up_as_provider"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_14ssp" />
+        <!--<android.support.v7.widget.AppCompatTextView-->
+            <!--android:id="@+id/tvSignUpProvider"-->
+            <!--android:layout_width="@dimen/_200sdp"-->
+            <!--android:layout_height="@dimen/_35sdp"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="@dimen/_15sdp"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/sign_up_as_provider"-->
+            <!--android:textColor="@color/colorWhite"-->
+            <!--android:textSize="@dimen/_14ssp" />-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -242,6 +242,7 @@
                 android:layout_alignParentLeft="true"
                 android:drawableTop="@drawable/about_us"
                 android:gravity="center"
+                android:textColor="@color/colorAccent"
                 android:onClick="aboutUs"
                 android:text="@string/str_about_us" />
 
@@ -251,6 +252,7 @@
                 android:layout_alignParentRight="true"
                 android:drawableTop="@drawable/contact_us"
                 android:gravity="center"
+                android:textColor="@color/colorAccent"
                 android:onClick="contactUs"
                 android:text="@string/str_contact_us" />
         </RelativeLayout>

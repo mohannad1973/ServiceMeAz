@@ -26,6 +26,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="mobile">Mobile</string>
+    <string name="mobile_placeholder">       e.g. 550000000</string>
     <string name="full_name">Full Name</string>
     <string name="mobile_no">Mobile No.</string>
     <string name="confirm_password">Confirm Password</string>
@@ -89,6 +90,7 @@
     <string name="scheduled_order">Scheduled Order</string>
     <string name="completed_order">Completed Order</string>
     <string name="ongoing_orders">OnGoing Orders</string>
+    <string name="missing_orders">Missing Orders</string>
     <string name="cancelled_orders">Cancelled Orders</string>
     <string name="service_for_offices">Service for Offices</string>
     <string name="service_for_homes">Service for Homes</string>
@@ -185,6 +187,7 @@
     <string name="message_select_subscription_plan">Please Select Subscription Plan</string>
     <string name="message_enter_country_code">Please Enter Country Code</string>
     <string name="message_enter_valid_website">Please Enter Valid Website Address.</string>
+    <string name="message_enter_valid_service">Please Enter Valid Service.</string>
     <string name="press_once_again_to_exit">Press once again to Exit</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
@@ -206,7 +209,7 @@
     <string name="str_renew">Re-New</string>
     <string name="str_terms"><![CDATA[Terms & Conditions]]></string>
     <string name="about_us">About Us</string>
-    <string name="str_login">Service me Login</string>
+    <string name="str_login">Login</string>
     <string name="str_about_us">About</string>
     <string name="str_contact_us">Contact Us</string>
     <string name="message_enter_phone">Please Enter Phone Number.</string>

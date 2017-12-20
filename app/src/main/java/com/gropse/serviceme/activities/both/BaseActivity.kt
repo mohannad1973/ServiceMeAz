@@ -37,6 +37,12 @@ abstract class BaseActivity : AppCompatActivity() {
 
     }
 
+      fun removeHtmlTags(data: String): String {
+        var data = data
+        data = data.replace("\\<[^>]*>".toRegex(), "")
+        return data
+    }
+
     fun setUpToolbar(resId: Int, backEnable: Boolean = true, colorId: Int = R.color.colorWhite) {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)

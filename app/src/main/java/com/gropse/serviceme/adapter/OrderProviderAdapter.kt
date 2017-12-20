@@ -15,9 +15,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.ImageViewTarget
+import com.gropse.serviceme.MyApplication
 import com.gropse.serviceme.R
 import com.gropse.serviceme.pojo.OrderResult
 import com.gropse.serviceme.utils.AppConstants
+import com.gropse.serviceme.utils.CustomGeocoder
+import com.gropse.serviceme.utils.Prefs
 import kotlinx.android.synthetic.main.item_orders.view.*
 import java.math.RoundingMode
 import java.text.DecimalFormat
@@ -27,6 +30,11 @@ import java.util.concurrent.TimeUnit
 
 class OrderProviderAdapter(private var type: String?, private var context: Context, private var listener: OnItemClick?) : RecyclerView.Adapter<OrderProviderAdapter.CategoryViewHolder>() {
     private val list = ArrayList<OrderResult>()
+
+    private val geo = CustomGeocoder()
+
+    var currentLat = 0.0f
+    var currentLon = 0.0f
 
     fun getMyList(): ArrayList<OrderResult> {
         return list
@@ -91,10 +99,15 @@ class OrderProviderAdapter(private var type: String?, private var context: Conte
                 else -> NONE
             })
         }
+
+        val distanceFl = geo.kmDistanceBetweenPoints(currentLat, currentLon, bean.latitude.toFloat(), bean.longitude.toFloat())
+        //val distanceStr = "$distanceFl"
+
         holder!!.itemView!!.ivProvider.loadUrl(bean.image)
         holder!!.itemView!!.tvName.text = bean.name
         holder!!.itemView!!.tvLocation.text = bean.location
-        holder!!.itemView!!.tvDistance.roundDecimal(bean.distance)
+        holder!!.itemView!!.tvDistance.roundDecimal(distanceFl)
+//        holder!!.itemView!!.tvDistance.text = ""++" KM"
         /*holder!!.itemView!!.tvTime.leftTime(if (bean.createdDate == -1L) 0 else bean.createdDate)*/
 
         holder!!.itemView!!.tvTime.text = timeLeft(bean.createdDate)
@@ -139,11 +152,13 @@ class OrderProviderAdapter(private var type: String?, private var context: Conte
                 holder!!.itemView!!.btnFeedback.visibility = View.GONE
                 holder!!.itemView!!.llAcceptReject.visibility = View.GONE
             }
-            AppConstants.CANCELLED_ORDERS -> {
+            AppConstants.MISSING_ORDERS -> {
                 holder!!.itemView!!.tvTime.visibility = View.GONE
                 holder!!.itemView!!.llDateTime.visibility = View.GONE
                 holder!!.itemView!!.btnFeedback.visibility = View.GONE
                 holder!!.itemView!!.llAcceptReject.visibility = View.GONE
+                holder!!.itemView!!.llServiceType.visibility = View.GONE
+                holder!!.itemView!!.llReason.visibility = View.GONE
             }
         }
     }
@@ -167,6 +182,10 @@ class OrderProviderAdapter(private var type: String?, private var context: Conte
             itemView.btnReject.setOnClickListener(this)
             itemView.btnFeedback.setOnClickListener(this)
             itemView.serviceContainer.setOnClickListener(this)
+
+
+            currentLat = MyApplication.instance.getLat()
+            currentLon = MyApplication.instance.getLon()
 
             if (list.size > 0) {
                 object : CountDownTimer((list[0].createdDate) * 1000, 1000) {

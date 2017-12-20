@@ -8,6 +8,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import com.google.gson.GsonBuilder
+
+
 
 object ServiceGenerator {
 
@@ -15,10 +18,14 @@ object ServiceGenerator {
     private val check="abc";
     //private val BASE_URL = BuildConfig.BASE_URL
 
+
+    private  var gson = GsonBuilder()
+    .setLenient()
+    .create()
     private val builder = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create(Gson()))
+            .addConverterFactory(GsonConverterFactory.create(gson))
 
     private var retrofit = builder.build()
 

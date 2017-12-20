@@ -91,7 +91,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_height="145dp"
                     android:background="@color/colorWhite">
 
                     <LinearLayout
@@ -102,7 +102,7 @@
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="@dimen/_90sdp"
+                            android:layout_height="145dp"
                             android:layout_weight="1"
                             android:background="@drawable/home_screen_item_selector"
                             android:orientation="vertical"
@@ -124,19 +124,19 @@
                                 android:id="@+id/tvAddress"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginTop="8dp"
                                 android:gravity="center_vertical"
                                 android:paddingEnd="0dp"
-                                android:paddingStart="@dimen/_40sdp"
+                                android:paddingStart="10dp"
                                 android:textColor="@color/colorBlack"
-                                android:textSize="@dimen/_14ssp"
+                                android:textSize="13sp"
                                 tools:text="D-54 Madhu Vihar Delhi 110065" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="@dimen/_90sdp"
+                            android:layout_height="145dp"
                             android:layout_weight="1"
                             android:background="@drawable/home_screen_item_selector"
                             android:orientation="vertical"
@@ -160,12 +160,12 @@
                                 android:id="@+id/tvDistance"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_marginTop="8dp"
                                 android:gravity="center_vertical"
                                 android:paddingEnd="0dp"
                                 android:paddingStart="@dimen/_40sdp"
                                 android:textColor="@color/colorBlack"
-                                android:textSize="@dimen/_14ssp"
+                                android:textSize="13sp"
                                 tools:text="5 KM" />
 
                         </LinearLayout>

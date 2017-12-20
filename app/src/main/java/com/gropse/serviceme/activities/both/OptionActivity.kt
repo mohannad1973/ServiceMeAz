@@ -2,6 +2,7 @@ package com.gropse.serviceme.activities.both
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.location.Address
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -9,17 +10,21 @@ import android.view.View
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.gson.Gson
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.aboutus_contactus.AboutUsActivity
 import com.gropse.serviceme.activities.aboutus_contactus.ContactUsActivity
 import com.gropse.serviceme.activities.provider.SignUpProviderActivity
+import com.gropse.serviceme.activities.user.ProviderListActivity
 import com.gropse.serviceme.activities.user.SignUpUserActivity
-import com.gropse.serviceme.utils.AppConstants
-import com.gropse.serviceme.utils.Prefs
-import com.gropse.serviceme.utils.circularDrawable
-import com.gropse.serviceme.utils.textColor
+import com.gropse.serviceme.network.NetworkClient
+import com.gropse.serviceme.network.ServiceGenerator
+import com.gropse.serviceme.pojo.AddServiceResult
+import com.gropse.serviceme.pojo.BaseResponse
+import com.gropse.serviceme.utils.*
 import com.patloew.rxlocation.RxLocation
 import io.reactivex.plugins.RxJavaPlugins
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_option.*
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -39,8 +44,8 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         llLocation.circularDrawable(R.color.colorButton)
-        tvSignUpUser.circularDrawable()
-        tvSignUpProvider.circularDrawable()
+        //tvSignUpUser.circularDrawable()
+        //tvSignUpProvider.circularDrawable()
         tvLogin.circularDrawable()
         tvSkip.circularDrawable()
         ivPin.circularDrawable(R.color.colorWhite)
@@ -91,8 +96,8 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
             russian()
             recreate()
         }
-        tvSignUpUser.setOnClickListener({ startActivity(Intent(this, SignUpUserActivity::class.java)) })
-        tvSignUpProvider.setOnClickListener({ startActivity(Intent(this, SignUpProviderActivity::class.java)) })
+        //tvSignUpUser.setOnClickListener({ startActivity(Intent(this, SignUpUserActivity::class.java)) })
+        //tvSignUpProvider.setOnClickListener({ startActivity(Intent(this, SignUpProviderActivity::class.java)) })
         tvLogin.setOnClickListener({ startActivity(Intent(this, LoginActivity::class.java)) })
 //        tvSkip.setOnClickListener({ startActivity(Intent(this, OptionActivity::class.java)) })
 
@@ -201,7 +206,15 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
                     if (location != null) {
                         // Logic to handle location object
                         Log.d("location", "" + location.latitude + " " + location.longitude)
-                        //tvLocation.setText()
+//                        tvLocation.setText()
+
+                        val lat = location.latitude
+                        val lon = location.longitude
+
+                        Prefs(this).latitude = "$lat"
+                        Prefs(this).longitude = "$lon"
+
+
                     }
                 }
                 .addOnFailureListener(this) {
@@ -213,22 +226,30 @@ class OptionActivity : BaseActivity(), EasyPermissions.PermissionCallbacks {
 
         val locationRequest = LocationRequest.create()
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(5000)
+                .setInterval(1000)
+
 
         compositeDisposable?.add(rxLocation.settings().checkAndHandleResolution(locationRequest)
                 .subscribe { aBoolean ->
                     if (aBoolean) {
-                        /*  compositeDisposable?.add(rxLocation.location().updates(locationRequest)
+
+                        //compositeDisposable.add(rxLocation.location().update(locationRequest)).flatMap
+
+                          compositeDisposable?.add(rxLocation.location().updates(locationRequest)
                                   .flatMap<Address> { location -> rxLocation.geocoding().fromLocation(location).toObservable() }
                                   .subscribe { address ->
-                                      tvLocation.text = address.countryName
-                                  })*/
+                                      val countryName = address.countryName
+                                      tvLocation.text = countryName
+                                      Prefs(this).countryName = countryName
+                                  })
 
                         compositeDisposable?.add(rxLocation.location().lastLocation()
                                 .flatMapObservable { location -> rxLocation.geocoding().fromLocation(location).toObservable() }
                                 .subscribe { address ->
                                     /* do something */
-                                    tvLocation.text = address.countryName
+                                    val countryName = address.countryName
+                                    tvLocation.text = countryName
+                                    Prefs(this).countryName = countryName
                                 })
                     }
                 })

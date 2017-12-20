@@ -9,6 +9,7 @@ import android.os.Bundle
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.gropse.serviceme.MyApplication
 import com.gropse.serviceme.R
 import com.gropse.serviceme.activities.both.BaseActivity
 import com.gropse.serviceme.pojo.OrderResult
@@ -40,7 +41,14 @@ class AcceptingActivity : BaseActivity(), OnMapReadyCallback {
         tvName.text = orderResult.name
         tvServiceType.text = orderResult.serType
         tvLocation.text = orderResult.location
-        tvDistance.roundDecimal(orderResult.distance)
+
+        val geo = CustomGeocoder()
+        val distanceFl = geo.kmDistanceBetweenPoints(MyApplication.instance.getLat(),
+                MyApplication.instance.getLon(),
+                orderResult.latitude.toFloat(),
+                orderResult.longitude.toFloat())
+
+        tvDistance.roundDecimal(distanceFl)
 
         btnGetDirection.setOnClickListener {
             if (orderResult.latitude.isNotBlank() && orderResult.longitude.isNotBlank()) {

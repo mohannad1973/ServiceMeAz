@@ -27,6 +27,8 @@ class ForgotPasswordActivity : BaseActivity() {
         mActivity = this
         setUpToolbar(R.string.forgot_pass)
 
+        otpRequest.lang = Prefs(this).locale
+
         if (intent.hasExtra(AppConstants.SCREEN)) {
             type = intent.getStringExtra(AppConstants.SCREEN)
         }
@@ -168,20 +170,26 @@ class ForgotPasswordActivity : BaseActivity() {
         }
     }
 
+
+
     private fun onResponse(response: Any, resType: String = "") {
         try {
+
             if (response is BaseResponse) {
                 when (response.errorCode) {
                     1 -> logout()
                     3 -> toast(response.message)
                     200 -> {
+
                         if (response.obj.isJsonObject && resType == ForgotResult::class.java.name) {
-                            val bean = Gson().fromJson(response.obj.asJsonObject.toString(), ForgotResult::class.java)
+
+                            val bean = Gson().fromJson(removeHtmlTags(response.obj.asJsonObject.toString()), ForgotResult::class.java)
                             otpRequest.securityToken = bean?.securityToken ?: ""
                         } else if (resType.isBlank()){
                             val intent = Intent(mActivity, ChangePasswordActivity::class.java)
                             intent.putExtra(OtpRequest::class.java.name, otpRequest)
                             intent.putExtra(AppConstants.SCREEN, AppConstants.RESET_PASSWORD)
+                            intent.putExtra(AppConstants.TYPE, type)
                             startActivity(intent)
                         }
                     }
